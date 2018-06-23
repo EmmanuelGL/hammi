@@ -1,0 +1,11 @@
+$(document).ready(function(){
+    $(".dona").click(function(){
+        $(".graficaA").hide();
+        $(".graficaB").show();
+    });
+    $(".barra").click(function(){
+        $(".graficaA").show();
+        $(".graficaA1").show();
+        $(".graficaB").hide();
+    });
+});

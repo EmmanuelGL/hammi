@@ -1,0 +1,193 @@
+extends ../templates/default
+include ../templates/dependencies
+link(rel='stylesheet', href='/stylesheets/tab.css')
+block content
+  script(src='http://c.fzilla.com/1286136086-jquery.js')
+  //-   script(src='http://c.fzilla.com/1291523190-jpaginate.js')
+  script(src='/vendor/pagination/jpaginate.js')
+  link(rel='stylesheet', href='/stylesheets/query.css')    
+  script.
+      $(document).ready(function(){
+      $("#content").jPaginate();
+      });
+  
+    
+     
+  div.ingreso(style='margin-top:50px')
+      div.panel
+        div.box-body(style='min-height: 700px; ')
+          div.jumbotron(style='background: white')
+            div.container
+                div.row.menu
+                    div.col-md-3
+                        div.well.well-sm
+                            form.form-horizontal(action='/consultas/tesis', method='post')
+                                a.text-cente Ordenar
+                                div
+                                    select.form-control.text-all(name='Busqueda',onChange="this.form.submit()")
+                                        option='Elige una opción'
+                                        option='Alunmo'  
+                                        option='Titulo'
+                                        option='Clasificación'
+                                        option='Especialidad'
+                                        option='Departamento'
+                                        option='Grado'
+                                        option='Fecha de Publicación'
+                                        option='Directores'
+                                        option='Sinodales'
+                    div.col-md-1
+                        button.icono(onclick=" location.href='/consultas/tesis' ") 
+                            i.glyphicon.glyphicon-home
+                            span Datos   
+                    div.container.col-md-7(style='padding-top: 5px;')
+                        div.pull-right
+                            button.btn.btn-info.btn-lg.text-all(type='button', data-toggle='modal', data-target='#myModal') CONSULTA AVANZADA
+                        // Modal
+                        div#myModal.modal.fade(role='dialog')
+                            form(action='/consultas/tesis' method='post' autocomplete='off')
+                                div.modal-dialog
+                                    div.modal-content.text-all
+                                        div.modal-header
+                                            button.close(type='button', data-dismiss='modal') ×
+                                            h4.modal-title.text-all Búsqueda avanzada de tesis
+                                        div.modal-body.text-all
+                                            
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(name='modal' style="display:none" value="desorden")
+                                                        input(type='text' name='departamento' placeholder='Departamento' class='form-control')
+                                                    div.col-xs-6
+                                                        input(type='text' name='grado' placeholder='Grado' class='form-control')
+                                                br
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(type='text' name='especialidad' placeholder='Especialidad' class='form-control')
+                                                div.row
+                                                    div.col-xs-6
+                                                        h4 Desde
+                                                        div.input-group
+                                                            span.input-group-addon
+                                                                i.glyphicon.glyphicon-calendar
+                                                            input.form-control(type="Date" name="desde" min="1960-01" value="1960-01-01")
+                                                    div.col-xs-6
+                                                        h4 Hasta
+                                                        div.input-group
+                                                            span.input-group-addon
+                                                                i.glyphicon.glyphicon-calendar
+                                                            input.form-control(type="Date" name="hasta" min="1960-01" value="2020-01-01")
+                                                br
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(type='text' name='alumno' placeholder='Alumno' class='form-control')
+                                                br
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(type='text' name='titulo' placeholder='Título' class='form-control')
+                                                br
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(type='text' name='director' placeholder='Director' class='form-control')
+                                                br
+                                                div.row
+                                                    div.col-xs-6
+                                                        input(type='text' name='sinodal' placeholder='Sinodal' class='form-control')
+    
+                                        div.modal-footer
+                                            div.pull-left
+                                                button.btn.btn-danger(type='button', data-dismiss='modal') Cancelar
+                                            div.pull-right
+                                                button.btn.btn-primary(type="submit" class='btn btn-default')
+                                                    i.fa.fa-spinner.fa-pulse.fa-lg.fa-fw(ng-show='isProcess')
+                                                    //- span(ng-show='!isProcess') Buscar
+                                                    span Buscar
+                                            
+
+                -if(items==0) 
+                        div(class="alert alert-warning alert-dismissable")
+                            button(type="button" class="close" data-dismiss="alert") &times;
+                            strong ¡Atención!
+                                | No se encontró nada en su búsqueda.                      
+                p
+                div#content.text-all
+                    
+                    -if(items)
+                        -for item in items
+                        
+                            div.thumbnail
+                                table#local.table.table-striped.table-bordered        
+                                
+                                    thead
+                                        td(colspan="2") 
+                                            a #{item.TITULO}
+                                    tbody    
+                                        tr
+                                            td 
+                                                b Alumno:
+                                            td
+                                                ul #{item.ALUMNO} 
+                                        tr
+                                            td 
+                                                b Clasificación:
+                                            td 
+                                                ul(style="list-style-type:none")
+                                                    li #{item.clasificacion}
+                                                    li #{item.clasificacion1}
+                                        tr
+                                            td
+                                                b Especialidad:
+                                            td 
+                                                ul #{item.especialidad}
+                                        tr
+                                            td
+                                                b Departamento:
+                                            td 
+                                                ul #{item.DEPARTAMENTO}
+                                        tr
+                                            td
+                                                b Grado:
+                                            td 
+                                                ul #{item.GRADO}
+                                        tr
+                                            td
+                                                b Fecha de Publicación:
+                                            td 
+                                                ul #{item.fechapublicacion}
+                                        tr
+                                            td 
+                                                b Directores:
+                                            td  
+                                                ul(style="list-style-type:none")
+                                                    li #{item.DIRECTOR} 
+                                                    li #{item.DIRECTOR1}
+                                                    li #{item.DIRECTOR2} 
+                                                    li #{item.DIRECTOR3}
+                                                    li #{item.DIRECTOR4}                                          
+                                        tr
+                                            td
+                                                b Sinodales:
+                                            td 
+                                                ul(style='list-style-type:none')
+                                                    li #{item.SINODAL}
+                                                    li #{item.SINODAL1}
+                                                    li #{item.SINODAL2}
+                                                    li #{item.SINODAL3}
+                                                    li #{item.SINODAL4}
+                        
+            
+                        
+            
+                        
+
+                                       
+                                       
+                                        
+                                                           
+                                   
+                                            
+                           
+                                
+                                
+                                
+                                        
+                        
+                                            

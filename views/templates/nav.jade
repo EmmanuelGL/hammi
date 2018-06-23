@@ -1,0 +1,27 @@
+nav.navbar-fixed-top.nav-color(white="30px")
+  div(class="container-fluid")
+    div(class="navbar-header")
+      button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+        span(class="sr-only")= 'Toggle navigation'
+        span(class="icon-bar")
+        span(class="icon-bar")
+        span(class="icon-bar")
+      a.navbar-brand.text.text-title(href="/")= 'Borges'
+    
+    
+    div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")     
+      ul(class="nav navbar-nav navbar-right")
+        if !isAuthenticated
+          //li
+            a.text(href="/auth/signup")= 'Registrarse'
+          li
+            a.text-all.text(href="/auth/signin")= 'Iniciar Sesión'
+        if isAuthenticated    
+          li(class="dropdown")
+            a.text-all.text(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= user.nombre
+              span(class="caret")
+            ul(class="dropdown-menu")
+              li
+                a.text.fa.fa-sign-out(href="/auth/logout")= 'Cerrar Sesión'
+    
+    

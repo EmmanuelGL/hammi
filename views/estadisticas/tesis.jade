@@ -1,0 +1,67 @@
+extends ../templates/default
+block content
+   script(type='text/javascript', src='/javascripts/graficas.js')
+   script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+   script(type='text/javascript', src='/javascripts/muestra.js') 
+   div.ingreso(style='margin-top:50px')
+      div.panel
+        div.box-body(style='min-height: 700px; ')
+          div.jumbotron(style='background: white')
+            div.container
+                div.row
+                    div.col-md-3
+                        div.well.well-sm
+                            form.form-horizontal(action='/estadisticas/tesis', method='post')
+                                a.text-center.text-all Estadística
+                                div
+                                    select.form-control.text-all(name='Busqueda',onChange="this.form.submit()")
+                                        option='Elige una opción'
+                                        option='Departamento'  
+                                        option='Especialidad'
+                                        option='Grado'
+                                        option='Género'
+                                        option='Departamento y Grados'
+                                        option='Especialidad y Departamentos'
+                    div.col-md-4(style='float: right;')
+                        div.well.well-sm
+                            form.form-horizontal(action='/estadisticas/tesis', method='post')
+                                a.text-center.text-all Período
+                                div.input-group
+                                      span.input-group-addon
+                                        i.glyphicon.glyphicon-calendar
+                                      input#msg.form-control(type="month" name="mes" min="1960-01" placeholder='Introdusca un año')
+                div.nav-tabs-custom
+                  ul.nav.nav-tabs.pull-right
+                    li
+                      a.dona( data-target='#donut', data-toggle='tab')
+                        i.fa.fa-pie-chart(aria-hidden='true')
+                        |  DONA
+                    li.active
+                      a.barra( data-target='#bar', data-toggle='tab')
+                        i.fa.fa-bar-chart(aria-hidden='true')
+                        |  BARRAS
+
+
+                        
+                -if(items1)
+                    h2.text-all(style='text-align:center;') #{title}
+                    
+                    
+                    div#graficaA.graficaA
+                    
+                    div#graficaB.graficaB(style='display:none;')
+                        
+                        div(class='col-md-10 col-md-offset-3') 
+                        
+                        table#datatable(style="display:none")
+                            thead
+                                tr
+                                    th #{Title}
+                                    th Total   
+                            tbody
+                                -if(items1)
+                                        -for item1 in items1
+                                            tr
+                                                -for val,key in item1
+                                                    td.text-center #{val}
+                    

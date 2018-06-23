@@ -1,0 +1,298 @@
+    .pagination{
+    list-style:none;
+    margin:0 px;
+    padding: 0 px;
+    align-content: center;
+    }
+    .pagination li{
+    float: left;
+    margin: 3 px;
+    }
+    .pagination li a{
+    display:block;
+    padding: 3 px 5 px;
+    color: #fff;
+    background-color: #44b0dd;
+    text-decoration:none;
+    
+    }
+    .pagination li a.activate{
+    border: 1 px solid #000;
+    color: #000;
+    background-color: #fff;
+    
+    }
+    .pagination li a.inactive{
+    background-color: #eee;
+    color: #777;
+    border: 1 px solid #ccc;
+    }
+    
+    /*para mostrar los datos como tabla*/
+    /*style.*/
+    .modal-header {
+    background-color: #58ACFA;
+    color:white !important;
+    }
+    /*
+    .timeline {
+    position: relative;
+    margin: 0 0 30px 0;
+    padding: 0;
+    list-style: none;
+    }
+    .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #ddd;
+    left: 31px;
+    margin: 0;
+    border-radius: 2px;
+    }
+    .timeline > li {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    }
+    .timeline > li:before,
+    .timeline > li:after {
+    content: " ";
+    display: table;
+    }
+    .timeline > li:after {
+    clear: both;
+    }
+    .timeline > li > .timeline-item {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-top: 0;
+    background: #fff;
+    color: #444;
+    margin-left: 60px;
+    margin-right: 15px;
+    padding: 0;
+    position: relative;
+    }
+    .timeline > li > .timeline-item > .time {
+    color: #999;
+    float: right;
+    padding: 10px;
+    font-size: 12px;
+    }
+    .timeline > li > .timeline-item > .timeline-header {
+    margin: 0;
+    color: #555;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.1;
+    }
+    .timeline > li > .timeline-item > .timeline-header > a {
+    font-weight: 600;
+    }
+   
+    .timeline > li > .fa,
+    .timeline > li > .glyphicon,
+    .timeline > li > .ion {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    position: absolute;
+    color: #666;
+    background: #d2d6de;
+    border-radius: 50%;
+    text-align: center;
+    left: 18px;
+    top: 0;
+    }
+    .timeline > .time-label > span {
+    font-weight: 600;
+    padding: 5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 4px;
+    }
+    .timeline-inverse > li > .timeline-item {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    }
+    .timeline-inverse > li > .timeline-item > .timeline-header {
+    border-bottom-color: #ddd;
+    }
+    .timeline {
+    position: relative;
+    margin: 0 0 30px 0;
+    padding: 0;
+    list-style: none;
+    }
+    .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #ddd;
+    left: 31px;
+    margin: 0;
+    border-radius: 2px;
+    }
+    .timeline > li {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    }
+    .timeline > li:before,
+    .timeline > li:after {
+    content: " ";
+    display: table;
+    }
+    .timeline > li:after {
+    clear: both;
+    }
+    .timeline > li > .timeline-item {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-top: 0;
+    background: #fff;
+    color: #444;
+    margin-left: 60px;
+    margin-right: 15px;
+    padding: 0;
+    position: relative;
+    }
+    .timeline > li > .timeline-item > .time {
+    color: #999;
+    float: right;
+    padding: 10px;
+    font-size: 12px;
+    }
+    .timeline > li > .timeline-item > .timeline-header {
+    margin: 0;
+    color: #555;
+    border-bottom: 1px solid #f4f4f4;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.1;
+    }
+    .timeline > li > .timeline-item > .timeline-header > a {
+    font-weight: 600;
+    }
+    .timeline > li > .timeline-item > .timeline-body,
+    .timeline > li > .timeline-item > .timeline-footer {
+    padding: 10px;
+    }
+    .timeline > li > .fa,
+    .timeline > li > .glyphicon,
+    .timeline > li > .ion {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    position: absolute;
+    color: #666;
+    background: #d2d6de;
+    border-radius: 50%;
+    text-align: center;
+    left: 18px;
+    top: 0;
+    }
+    .timeline > .time-label > span {
+    font-weight: 600;
+    padding: 5px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 4px;
+    }
+    .timeline-inverse > li > .timeline-item {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    }
+    .timeline-inverse > li > .timeline-item > .timeline-header {
+    border-bottom-color: #ddd;
+    }
+    .dl-horizontal dt {
+        margin-left: 70px;
+        width: 168px;
+        text-align: left;
+    }
+    
+    .dl-horizontal dd {
+        margin-left: 270px;
+    }
+     */
+
+
+    
+.menu{
+    color: white;
+    text-align: center;
+  }
+  .icono{
+   
+    width: 65px;
+    height: 65px;
+    margin-top: 5px;
+    --border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #585858;
+    cursor: pointer;
+  }
+  .icono i{
+    font-size: 25px;
+  }
+  
+  /*estilo de mi lista para los bordes*/
+  .muestra{
+    width: 100%;
+    border: double #999;
+    text-align: left;
+    border-collapse: collapse;
+    margin: 0 0 1em 0;
+    caption-side: top;
+ 
+  }
+  .timeline-header{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 1em 0 1em 0;
+    caption-side: top;
+    border-bottom-style: solid;
+    color: #999;
+    border-width: 1px; 
+    /* border-bottom-style: 100px; */
+  }
+  /* dt, dd {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #000;
+    border-collapse: collapse;
+ } */
+
+
+
+
+   
+ /* caption, td, th {
+    padding: 0.3em;
+ }
+ th, td {
+    border-bottom: 1px solid #999;
+    width: 25%;
+ }
+ caption {
+    font-weight: bold;
+    font-style: italic;
+ } */
