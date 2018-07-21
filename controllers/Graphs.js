@@ -1,7 +1,17 @@
 var mysql = require('mysql'),
 	graficasA = [], graficasT = [],
 	titleA = [], titleT = [];
-
+	// const products = [
+	// 	{
+	// 	  id: 1,
+	// 	  name: 'laptop'
+	// 	},
+	// 	{
+	// 	  id: 2,
+	// 	  name: 'microphone'
+	// 	}
+	//   ];
+	  
 function enviarrowsActas(req, res) {
 	//console.log(JSON.stringify(graficasA[0])+'------------------------------');
 	//console.log
@@ -15,6 +25,30 @@ function enviarrowsActas(req, res) {
 
 		items1: graficasA[0],
 		isAuthenticated: req.isAuthenticated(),
+		user: req.user,
+		//data:graficasA[0]
+	});
+	/* var data={
+		 nombre:'emmas',
+		 ap:'prueba',
+		 am:'ya mero',
+	 }
+	 res.send(data);*/
+}
+function enviarrowsTesis(req, res) {
+	//console.log(JSON.stringify(graficasA[0])+'------------------------------');
+	//console.log
+	/*var title=[{datos:[2]},{
+				datos:[1]}];
+	console.log(title);*/
+	res.render('estadisticas/tesis', {
+		title: titleT[0],
+		//title,
+		//JSON.stringify(graficasA[0]),
+
+		items1: graficasT[0],
+		isAuthenticated: req.isAuthenticated(),
+		
 		user: req.user,
 		//data:graficasA[0]
 	});
@@ -200,7 +234,7 @@ module.exports = {
 			grafica = 'v_egrado';
 			titulos = 'Alumnos Graduados por Maestría y Doctorado'
 		}
-		if (seleccion == 'Genero') {
+		if (seleccion == 'Género') {
 			head = "genero,total";
 			grafica = 'v_egenero';
 			titulos = 'Genero de Alumnos Graduados'
@@ -230,5 +264,64 @@ module.exports = {
 			graficasT.push(rows1)
 			enviarrowsTesis(req, res);
 		});
-	}
+	},
+
+
+	getprueba : (req, res) => {
+		var config = require('.././database/config');
+		var db = mysql.createConnection(config);
+		db.connect();
+		db.query(`select departamento,total from v_edepartamentoa` ,function (err, rows1, fields) {
+			//console.log(rows1);
+			if(err) throw err;
+
+			db.end();
+			var products = rows1;
+			console.log(products);
+			res.json(products);
+		});
+		
+		//res.json(products);
+	  },
+	  
+	  postprueba : (req, res) => {
+		console.log(req.body);
+		const { name } = req.body;
+		products.push({
+		  id: products.length + 1,
+		  name
+		});
+		res.json('Successfully created');
+	  },
+	  
+	  
+	  putprueba: (req, res) => {
+		console.log(req.body, req.params)
+		const { id } = req.params;
+		const { name } = req.body;
+	  
+		products.forEach((product, i) => {
+		  if (product.id == id) {
+			product.name = name;
+		  }
+		});
+		res.json('Successfully updated');
+	  
+	  },
+
+	  
+	 deleteprueba: (req, res) => {
+		const { id } = req.params;
+	  
+		products.forEach((product, i) => {
+		  if(product.id == id) {
+			products.splice(i, 1);
+		  }
+		});
+		res.json('Successfully deleted');
+	  },
+	  
+	  
+	  
+
 };

@@ -57,6 +57,10 @@ div#mySidebar.w3-sidebar.w3-bar-block.w3-card.w3-animate-left
               a(href='/tablas/tesis')
                 i.fa.fa-circle-o
                 | Tesis
+        li.dropdown.completo
+          a.ripple-effect.dropdown-toggle.expandable(href='/users/registro')
+            span.glyphicon.glyphicon-list-alt
+            span.expanded-element Nuevo Registro
 script.
   function w3_open() {
   document.getElementById("main").style.marginLeft = "5%";

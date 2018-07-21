@@ -7,8 +7,8 @@ var AuthMiddleware = require('.././middleware/auth');
 router.get('/', controllers.HomeController.index);
 
 //routas de usuario
-router.get('/auth/signup', controllers.UserController.getSignUp);
-router.post('/auth/signup', controllers.UserController.postSignUp);
+// router.get('/auth/signup', controllers.UserController.getSignUp);
+// router.post('/auth/signup', controllers.UserController.postSignUp);
 router.get('/auth/signin', controllers.UserController.getSignIn);
 router.post('/auth/signin',  passport.authenticate('local', {
 	successRedirect : '/',
@@ -16,6 +16,8 @@ router.post('/auth/signin',  passport.authenticate('local', {
 	failureFlash : true 
 }));
 router.get('/auth/logout', controllers.UserController.logout);
+router.get('/users/registro', AuthMiddleware.isLogged, controllers.UserController.getRegistro);
+// router.post('/users/registro', controllers.UserController.postSignUp);
 //router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
 
 //rutas para laas graficas de tesis y actas 
@@ -40,5 +42,10 @@ router.get('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.getAc
 router.post('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.postActas);
 router.get('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.getTesis);
 router.post('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.postTesis);
+//ajax
+router.get('/products',AuthMiddleware.isLogged, controllers.Graphs.getprueba);
+router.post('/products',  AuthMiddleware.isLogged, controllers.Graphs.postprueba);
+router.put('/products/:id',  AuthMiddleware.isLogged, controllers.Graphs.putprueba);
+router.delete('/products/:id',  AuthMiddleware.isLogged, controllers.Graphs.deleteprueba);
 module.exports = router;
 

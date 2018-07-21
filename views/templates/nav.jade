@@ -11,9 +11,10 @@ nav.navbar-fixed-top.nav-color(white="30px")
     
     div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")     
       ul(class="nav navbar-nav navbar-right")
+        //- if isAuthenticated
+        //-   li
+        //-     a.text(href="/users/registro")= 'Nuevo Registro'
         if !isAuthenticated
-          //li
-            a.text(href="/auth/signup")= 'Registrarse'
           li
             a.text-all.text(href="/auth/signin")= 'Iniciar Sesión'
         if isAuthenticated    

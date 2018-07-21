@@ -4,10 +4,13 @@ extends ../templates/default
 block content
    script(type='text/javascript', src='/javascripts/graficas.js')
   
-   script(type='text/javascript', src='https://code.jquery.com/jquery-1.12.4.min.js')
+   //script(type='text/javascript', src='https://code.jquery.com/jquery-1.12.4.min.js')
    script(type='text/javascript', src='/javascripts/muestra.js')        
-
-   div.ingreso(style='margin-top:50px', ng-app='myApp')
+   // jQuery
+   script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
+   // App
+   script(src='/javascripts/prueba.js')
+   div.ingreso(style='margin-top:50px')
       div.panel
         div.box-body(style='min-height: 700px; ')
           div.jumbotron(style='background: white')
@@ -75,7 +78,57 @@ block content
                                             -for val,key in item1
                                                 td.text-center #{val}
             
-
+                    table#datatable2(style="display:none")
+                        thead
+                            tr
+                                th
+                                th Jane
+                                th John
+                        
+                        tbody
+                            tr
+                                th Apples
+                                td 3
+                                td 4
+                            tr
+                                th Pears
+                                td 2
+                                td 0
+                            tr
+                                th Plums
+                                td 5
+                                td 11
+                            tr
+                                th Bananas
+                                td 1
+                                td 1
+                            tr
+                                th Oranges
+                                td 2
+                                td 4
+                //- h1 Ajax Tutorial
+    
+                //-     button#getProducts
+                //-         | Get Products
+                    
+                //-     form#productForm
+                //-         input#newProduct(type='text')
+                            
+                //-         button(type='submit') Create Product
+                        
+                //-     table
+                //-         thead
+                //-             tr
+                //-                 th ID
+                                            
+                //-                 th Name
+                                            
+                //-                 th Actions
+                                
+                //-         tbody
+                
+   
+                        
                 
                 
 

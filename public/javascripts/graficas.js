@@ -102,9 +102,9 @@ if(this.title =='Alumnos Graduados por Departamento y Grado' || this.title =='Al
 
 			 
 			 Highcharts.chart('graficaA1', {
-				 /*data: {
+				 data: {
 					 table: 'datatable2'
-				 },*/
+				 },
 				 chart: {
 					 type: 'column',  // tipo de gráfica
 					 borderWidth: 0 // ancho del borde de la gráfica
@@ -137,11 +137,11 @@ if(this.title =='Alumnos Graduados por Departamento y Grado' || this.title =='Al
 					 verticalAlign: 'bottom',
 					 borderWidth: 1
 				 },
-				 series: [
+				//  series: [
 					 
 					
-					 {"data": [{"name": "Bioquímica","y": 5},{"name": "CIENCIAS BIOLOGIA CELULAR","y": 9},{"name": "Bioquímica","total": 5}],"name": "maestria"},
-					 {"data": [{"name": "Bioquímica","y": 1},{"name": "CIENCIAS BIOLOGIA CELULAR","y": 1}],"name": "doctorado"}]
+				// 	 {"data": [{"name": "Bioquímica","y": 5},{"name": "CIENCIAS BIOLOGIA CELULAR","y": 9},{"name": "Bioquímica","total": 5}],"name": "maestria"},
+				// 	 {"data": [{"name": "Bioquímica","y": 1},{"name": "CIENCIAS BIOLOGIA CELULAR","y": 1}],"name": "doctorado"}]
 					
 			 
  

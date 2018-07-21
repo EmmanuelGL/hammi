@@ -73,6 +73,7 @@ module.exports = {
 				busqueda = req.body.sinodal === ''?"":  busqueda1 = busqueda1+"\"SINODAL : "+req.body.sinodal +"\"";
 			
 			//console.log(consulta+'----------------------1')
+			
 			//console.log("Busqueda avansada: "+busqueda1+'------------------2')
 			//console.log(user);
 			/*consultaA.shift();
