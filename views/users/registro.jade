@@ -7,7 +7,7 @@ block content
   script(type='text/javascript', src='/javascripts/inputs.js')
   script(type='text/javascript', src='/javascripts/infoInputs.js')
   div.ingreso(style='margin-top:50px' ng-app='prueba')
-    div.panel
+    div.panel(ng-controller='TablaCtrl')
       div.box-body(style='min-height: 10px; ')
         div.jumbotron(style='background: white')
           div.row(style='margin-left: auto; margin-right: auto;')
@@ -333,48 +333,159 @@ block content
                           p {{sinodal3}}
                           p {{sinodal4}}
                           p {{sinodal5}}
-                    //-inserta codirectores
-                    div.container(class='col-md-11')
+                    //-inserta sinodales invitados
+                    //- div.container(class='col-md-11')
+                    //-   div.panel.panel-default
+                    //-     div.panel-heading Sinodal Invitado
+                    //-     div.panel-body 
+                    //-       div.container( class="table-responsive" )
+                    //-           a Invitados
+                    //-           br    
+                    //-           table(class="table table-bordered")
+                    //-             thead
+                    //-               tr
+                    //-                 th #            
+                    //-                 th Nombre
+                    //-                 th Nombre2          
+                    //-                 th Apellido
+                    //-                 th Apellido2            
+                    //-                 th Institución              
+                    //-                 th Cargo 
+                    //-                 th       
+                    //-             tbody
+                    //-               tr(ng-repeat='item in lista')
+                    //-                 td(style='cursor: not-allowed;')
+                    //-                   {{$index + 1}}              
+                    //-                 td(editable-td='', row='{{$index}}', field='nombre')
+                    //-                   {{item.nombre}}  
+                    //-                 td(editable-td='', row='{{$index}}', field='nombre2')
+                    //-                   {{item.nombre2}}               
+                    //-                 td(editable-td='', row='{{$index}}', field='apellido')
+                    //-                   {{item.apellido}} 
+                    //-                 td(editable-td='', row='{{$index}}', field='apellido2')
+                    //-                   {{item.apellido2}}               
+                    //-                 td(editable-td='', row='{{$index}}', field='institucion')
+                    //-                   {{item.institucion}}               
+                    //-                 td(editable-td='', row='{{$index}}', field='cargo')
+                    //-                   {{item.cargo}}    
+                    //-                 td
+                    //-                   span.glyphicon.glyphicon-trash(style='cursor: pointer;', ng-click='eliminar($index)')       
+                    //-           .btn-group
+                    //-             button#agrega.btn.btn-default(ng-click='agregar()')
+                    //-               span.glyphicon.glyphicon-plus
+
+
+                    //- prueba de sinodales              
+                    //- div.container(class='col-md-11')
+                    //-   div.panel.panel-default
+                    //-     div.panel-heading Sinodal Invitado
+                    //-     div.panel-body 
+                    //-       div.container(class="table-responsive" )
+                    //-         div
+                    //-             form.form-horizontal
+                    //-                 input#add(type='text', placeholder='Another one ?', ng-model='addName', ng-change='addTemp()')   
+                    //-                 input#add1(type='text', placeholder='Another one ?', ng-model='addAp1', ng-change='addTemp()')    
+                    //-                 input.btn.btn-primary(type='submit', ng-click='addRow()', ng-show='addName', value='+ add')
+                                   
+                    //-             h2 {{rows.length}} Friend{{plural(rows)}} 
+                    //-               span(ng-show='temp')
+                    //-                  | ?
+                    //-                 small.muted
+                    //-                   em (only {{rows.length-1}} actually....) 
+                    //-             table.table.table-striped
+                    //-               tr(ng-repeat='row in rows ', ng-class="{'muted':isTemp($index)}")
+                    //-                 td {{$index+1}}
+                    //-                 td {{row}}
+                    //-                 td {{row.addName}}
+                    //-                 td {{row.addAp1}}
+                    //-                 td
+                    //-                   button.btn.btn-danger.btn-mini(ng-click='deleteRow(row)', ng-hide='isTemp($index)')
+                    //-                     i.glyphicon.glyphicon-trash
+
+
+                    //-               #JSON
+                    //- inserta datos de alumno
+                    div.container(class='col-md-8')
                       div.panel.panel-default
                         div.panel-heading Sinodal Invitado
                         div.panel-body 
-                          div.container(ng-controller='TablaCtrl' class="table-responsive" )
-                              a Invitados
-                              br    
-                              table(class="table table-bordered")
-                                thead
-                                  tr
-                                    th #            
-                                    th Nombre
-                                    th Nombre2          
-                                    th Apellido
-                                    th Apellido2            
-                                    th Institución              
-                                    th Cargo 
-                                    th       
-                                tbody
-                                  tr(ng-repeat='item in lista')
-                                    td(style='cursor: not-allowed;')
-                                      {{$index + 1}}              
-                                    td(editable-td='', row='{{$index}}', field='nombre')
-                                      {{item.nombre}}  
-                                    td(editable-td='', row='{{$index}}', field='nombre2')
-                                      {{item.nombre2}}               
-                                    td(editable-td='', row='{{$index}}', field='apellido')
-                                      {{item.apellido}} 
-                                    td(editable-td='', row='{{$index}}', field='apellido2')
-                                      {{item.apellido2}}               
-                                    td(editable-td='', row='{{$index}}', field='institucion')
-                                      {{item.institucion}}               
-                                    td(editable-td='', row='{{$index}}', field='cargo')
-                                      {{item.cargo}}    
-                                    td
-                                      span.glyphicon.glyphicon-trash(style='cursor: pointer;', ng-click='eliminar($index)')       
-                              .btn-group
-                                button#agrega.btn.btn-default(ng-click='agregar()')
+                          div.col-xs-12
+                            div.col-xs-3(id="sinodal1" class="clonedInput")
+                              label(for="nombre")= 'Nombre'
+                              //-|Nombre:
+                              input(type='text' name="sinodal" id="sinodal" placeholder='sinodal' class='form-control' , ng-model='addName', ng-change='addTemp()' )
+                            div.col-xs-3(id="sinodal2" class="clonedInput" style='display:none;')
+                              label(for="nombre")= 'Nombre1'
+                              input(type='text' name="sinodal2" id="sinodal2" placeholder='sinodal2' class='form-control' , ng-model='addName1', ng-change='addTemp()')
+                            div.col-xs-3(id="sinodal3" class="clonedInput" style='display:none;')
+                              label(for="nombre")= 'Nombre2'
+                              //- |Nombre3:
+                              input(type='text' name="sinodal3" id="sinodal3" placeholder='sinodal3' class='form-control' , ng-model='addName2', ng-change='addTemp()')                    
+                            div.col-xs-3
+                              br
+                              center
+                                button#btnAddsinodal(type='button', class="btn btn-primary")
                                   span.glyphicon.glyphicon-plus
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                button#btnDelsinodal(type='button', class="btn btn-danger")
+                                  span.glyphicon.glyphicon-minus
+                          div.col-xs-12
+                            div.col-xs-3(id="sinodalap1" class="clonedInputA")
+                              label(for="nombre")= 'Nombre'
+                              //- |Apellido:
+                              input(type='text' name="apellidos" id="apellidos" placeholder='apellido' class='form-control', ng-model='addApsinodal', ng-change='addTemp()' )
+                            div.col-xs-3(id="sinodalap2" class="clonedInputA" style='display:none;')
+                              label(for="nombre")= 'Nombre'
+                              //- |Apellido2:
+                              input(type='text' name="apellidos2" id="apellidosi2" placeholder='apellido2' class='form-control' , ng-model='addApsinodal1', ng-change='addTemp()' )
+                            div.col-xs-3(id="sinodalap3" class="clonedInputA" style='display:none;')
+                              label(for="nombre")= 'Nombre'
+                              //- |Apellido3:
+                              input(type='text' name="apellidos3" id="apellidos3" placeholder='apellido3' class='form-control' , ng-model='addApsinodal2', ng-change='addTemp()')
+                            div.col-xs-3
+                              br
+                              center
+                                button#btnAddsinodalap(type='button', class="btn btn-primary")
+                                  span.glyphicon.glyphicon-plus
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                button#btnDelsinodalap(type='button', class="btn btn-danger")
+                                  span.glyphicon.glyphicon-minus
+                            div.col-xs-10
+                                label(for="institucion")= 'Institución'
+                                input(type='text' name='institucion' id='institucion'  class='form-control' , ng-model='institucionsino', ng-change='addTemp()')
+                            div.col-xs-10
+                                label(for="cargo")= 'Cargo'
+                                input(type='text' name='cargo' id='cargo'  class='form-control', ng-model='cargosino', ng-change='addTemp()')
+                            //- div.col-xs-10
+                            //-     label(for="grado")= 'Grado'
+                            //-     input(type='text' name='grado' id='grado' class='form-control' , ng-model='gradosino', ng-change='addTemp()')
+                            div 
+                              input.btn.btn-primary(type='submit', ng-click='addRow()', ng-show='addName', value='+ add')
+                          
+                    //-visualización de alumno 
+                    div.container(class='col-md-4')
+                      div.panel.panel-default
+                        div.panel-heading Vista Sinodal Invitado
+                           h5 {{rows.length}} Sinodales {{plural(rows)}} 
+                        div.panel-body 
+                          div.container(class="table-responsive" )
+                            div(ng-repeat='row in rows ', ng-class="{'muted':isTemp($index)}") 
+                              font(size=2)
+                                h4 Sinodal N° {{$index+1}}
+                                div.col-xs-10
+                                  a Nombre Completo:
+                                  h5 {{row.addName}} {{row.addName1}} {{row.addName2}} {{row.addApsinodal}} {{row.addApsinodal1}} {{row.addApsinodal2}}
+                                  a Institución:
+                                  h5 {{row.institucionsino}}
+                                  a Cargo:
+                                  h5 {{row.cargosino}}
+                                div.col-xs-2
+                                  button.btn.btn-danger.btn-mini(ng-click='deleteRow(row)', ng-hide='isTemp($index)')
+                                    i.glyphicon.glyphicon-trash
+                              
                               
 
+                              #JSON  
 
 
                   

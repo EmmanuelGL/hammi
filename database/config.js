@@ -1,17 +1,12 @@
 
 var config = {
-	host : 'localhost',
-	user : 'root',
-	password : '',
-	database : 'tesis'
-}
-module.exports = config;
-
-
-
-
-
-
+  	host : 'localhost',
+  	user : 'root',
+  	password : '',
+  	database : 'tesis'
+  }
+  module.exports = config;
+  
 
 
 
