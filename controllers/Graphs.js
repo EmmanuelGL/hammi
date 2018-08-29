@@ -267,61 +267,7 @@ module.exports = {
 	},
 
 
-	getprueba : (req, res) => {
-		var config = require('.././database/config');
-		var db = mysql.createConnection(config);
-		db.connect();
-		db.query(`select departamento,total from v_edepartamentoa` ,function (err, rows1, fields) {
-			//console.log(rows1);
-			if(err) throw err;
-
-			db.end();
-			var products = rows1;
-			console.log(products);
-			res.json(products);
-		});
-		
-		//res.json(products);
-	  },
-	  
-	  postprueba : (req, res) => {
-		console.log(req.body);
-		const { name } = req.body;
-		products.push({
-		  id: products.length + 1,
-		  name
-		});
-		res.json('Successfully created');
-	  },
-	  
-	  
-	  putprueba: (req, res) => {
-		console.log(req.body, req.params)
-		const { id } = req.params;
-		const { name } = req.body;
-	  
-		products.forEach((product, i) => {
-		  if (product.id == id) {
-			product.name = name;
-		  }
-		});
-		res.json('Successfully updated');
-	  
-	  },
-
-	  
-	 deleteprueba: (req, res) => {
-		const { id } = req.params;
-	  
-		products.forEach((product, i) => {
-		  if(product.id == id) {
-			products.splice(i, 1);
-		  }
-		});
-		res.json('Successfully deleted');
-	  },
-	  
-	  
+		  
 	  
 
 };

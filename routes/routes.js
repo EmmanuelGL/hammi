@@ -16,7 +16,6 @@ router.post('/auth/signin',  passport.authenticate('local', {
 	failureFlash : true 
 }));
 router.get('/auth/logout', controllers.UserController.logout);
-router.get('/users/registro', AuthMiddleware.isLogged, controllers.UserController.getRegistro);
 // router.post('/users/registro', controllers.UserController.postSignUp);
 //router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
 
@@ -42,10 +41,10 @@ router.get('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.getAc
 router.post('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.postActas);
 router.get('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.getTesis);
 router.post('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.postTesis);
-//ajax
-router.get('/products',AuthMiddleware.isLogged, controllers.Graphs.getprueba);
-router.post('/products',  AuthMiddleware.isLogged, controllers.Graphs.postprueba);
-router.put('/products/:id',  AuthMiddleware.isLogged, controllers.Graphs.putprueba);
-router.delete('/products/:id',  AuthMiddleware.isLogged, controllers.Graphs.deleteprueba);
+//ajax insert
+router.get('/users/registro', AuthMiddleware.isLogged, controllers.UserController.getRegistro);
+router.post('/insert',AuthMiddleware.isLogged, controllers.UserController.postInsert);
+router.get('/insert',AuthMiddleware.isLogged, controllers.UserController.postInsert);
+
 module.exports = router;
 
