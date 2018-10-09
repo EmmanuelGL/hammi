@@ -2,414 +2,461 @@ extends ../templates/default
 
 
 block content
-  script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js')
-  script(src='https://code.jquery.com/jquery-3.3.1.min.js')
-  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
-  script(type='text/javascript', src='/javascripts/inputs.js')
-  script(type='text/javascript', src='/javascripts/infoInputs.js')
-  link(rel='stylesheet', type='text/css', href='/vendor/bootstrap-sweetalert/dist/sweetalert.css')
-  script(type='text/javascript', src='/vendor/bootstrap-sweetalert/dist/sweetalert.min.js')
-  div.ingreso(style='margin-top:50px' ng-app='prueba')
-    div.panel(ng-controller='TablaCtrl')
-      div.box-body(style='min-height: 10px; ')
-        div.jumbotron(style='background: white')
-          div.row(style='margin-left: auto; margin-right: auto;')
-            //- inserta datos de alumno
-            div.container(class='col-md-8')
-              div.panel.panel-default
-                div.panel-heading Datos Alumno
-                div.panel-body 
-                  div.col-xs-10
-                    div.col-xs-9
-                      label(for="matricula")= 'Matricula'
-                      input(type='text' name='matricula' id='matricula' placeholder='Matricula' class='form-control' ng-model="matricula")
-                  div.col-xs-10
-                    div.col-xs-3(id="input1" class="clonedInput")
-                      label(for="nombre")= 'Nombre'
-                      //- |Nombre:
-                      input(type='text' name="name" id="name" placeholder='nombre' class='form-control' ng-model="nombre")
-                    div.col-xs-3(id="input2" class="clonedInput" style='display:none;')
-                      label(for="nombre2")= 'Nombre 2'
-                      //- |Nombre2:
-                      input(type='text' name="name2" id="name2" placeholder='nombre2' class='form-control' ng-model="nombre2")
-                    div.col-xs-3(id="input3" class="clonedInput" style='display:none;')
-                      label(for="nombre3")= 'Nombre 3'
-                      //- |Nombre3:
-                      input(type='text' name="name3" id="name3" placeholder='nombre3' class='form-control' ng-model="nombre3")                    
-                    div.col-xs-3
-                      br
-                      center
-                        button#btnAdd(type='button', class="btn btn-primary")
-                          span.glyphicon.glyphicon-plus
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnDel(type='button', class="btn btn-danger")
-                          span.glyphicon.glyphicon-minus
-                  div.col-xs-10
-                    div.col-xs-3(id="inputA1" class="clonedInputA")
-                      label(for="nombre")= 'Apellido'
-                      //- |Apellido:
-                      input(type='text' name="apellido" id="apellido" placeholder='apellido' class='form-control' ng-model="apellido")
-                    div.col-xs-3(id="inputA2" class="clonedInputA" style='display:none;')
-                      label(for="nombre")= 'Apellido 1'
-                      //- |Apellido2:
-                      input(type='text' name="apellido2" id="apellido2" placeholder='apellido2' class='form-control' ng-model="apellido2")
-                    div.col-xs-3(id="inputA3" class="clonedInputA" style='display:none;')
-                      label(for="nombre")= 'Apellido 2'
-                      //- |Apellido3:
-                      input(type='text' name="apellido3" id="apellido3" placeholder='apellido3' class='form-control' ng-model="apellido3")
-                    div.col-xs-3
-                      br
-                      center
-                        button#btnAdd1(type='button', class="btn btn-primary")
-                          span.glyphicon.glyphicon-plus
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnDel1(type='button', class="btn btn-danger")
-                          span.glyphicon.glyphicon-minus
-                  
-            //-visualización de alumno 
-            div.container(class='col-md-4')
-              div.panel.panel-default
-                div.panel-heading Vista Alumno
-                div.panel-body 
-                  a Matricula:
-                  p {{matricula}}
-                  a Nombre Completo:
-                  p {{nombre}} {{nombre2}} {{nombre3}} {{apellido}} {{apellido2}} {{apellido3}}
-            //- inserta tesis
-            div.container(class='col-md-8')
-              div.panel.panel-default
-                div.panel-heading Datos Tesis
-                div.panel-body 
-                  div.col-xs-12
-                    label(for="tt")= 'Titulo de tesis'
-                    input(type='text' name='tt' placeholder='Titulo de tesis' class='form-control' ng-model="tituloT")
-                  div.col-xs-5
-                    label(for="mes")= 'Mes'
-                    select.form-control.text-all(name='mes'  ng-model="mes")
-                            option='Enero'
-                            option='Febrero'  
-                            option='Marzo'
-                            option='Abril'
-                            option='Mayo'
-                            option='Junio'
-                            option='Julio'       
-                  div.col-xs-5
-                    label(for="tt")= 'Año'
-                    select.form-control.text-all(name='ano'  ng-model="ano")
-                            option='Año'
-                            option='1900'  
-                            option='2000'
-                            option='2010'
-                            option='2012'
-                            option='2008'
-                            option='2009'
+  
+  
+  div.ingreso.text-all(style='margin-top:50px' ng-app='registro' ng-cloak)
+    div.box-body(style='min-height: 10px; ')
+      div.jumbotron(style='background: white')
+        div.row(style='margin-left: auto; margin-right: auto;')
+          div.panel(ng-controller='data')
+            
+            form(name="form" autocomplete="off")
+              //- inserta datos de alumno
+              div.container(class='col-md-8')
+                div.panel.panel-default
+                  div.panel-heading Datos Alumno
+                  div.panel-body 
+                    div.col-xs-10
+                      div.col-xs-9
+                        label(for="matricula")= 'Matricula'
+                        input(type='text' name='matricula' id='matricula' placeholder='Matricula' class='form-control' ng-model="user.matricula"  required='')
+                      div.col-xs-12(ng-show='form.$submitted || form.matricula.$touched')
+                        div.warning(ng-show='form.matricula.$error.required') Introducir una Matricula.
+                    div.col-xs-12
+                      div.col-xs-3(id="input1" class="clonedInput")
+                        label(for="nombre")= 'Nombre'
+                        //- |Nombre:
+                        input(type='text' name="name" id="name" placeholder='nombre' class='form-control' ng-model="user.nombre"  required='') 
+                      div.col-xs-3(id="input2" class="clonedInput" style='display:none;')
+                        label(for="nombre2")= 'Nombre 2'
+                        //- |Nombre2:
+                        input(type='text' name="name2" id="name2" placeholder='nombre2' class='form-control' ng-model="user.nombre2")
+                      div.col-xs-3(id="input3" class="clonedInput" style='display:none;')
+                        label(for="nombre3")= 'Nombre 3'
+                        //- |Nombre3:
+                        input(type='text' name="name3" id="name3" placeholder='nombre3' class='form-control' ng-model="user.nombre3")                    
+                      div.col-xs-3
+                        br
+                        div.col-xs-12
+                          div.col-xs-6
+                            button#btnAdd(type='button', class="btn btn-primary")
+                              span.glyphicon.glyphicon-plus  
+                          div.col-xs-6
+                            button#btnDel(type='button', class="btn btn-danger")
+                              span.glyphicon.glyphicon-minus
+                      div.col-xs-12(ng-show='form.$submitted || form.name.$touched')
+                        div.warning(ng-show='form.name.$error.required') Introducir un Nombre.
+                    div.col-xs-12
+                      div.col-xs-3(id="inputA1" class="clonedInputA")
+                        label(for="nombre")= 'Apellido'
+                        //- |Apellido:
+                        input(type='text' name="apellido" id="apellido" placeholder='apellido' class='form-control' ng-model="user.apellido"  required='')
+                      div.col-xs-3(id="inputA2" class="clonedInputA" style='display:none;')
+                        label(for="nombre")= 'Apellido 1'
+                        //- |Apellido2:
+                        input(type='text' name="apellido2" id="apellido2" placeholder='apellido2' class='form-control' ng-model="user.apellido2")
+                      div.col-xs-3(id="inputA3" class="clonedInputA" style='display:none;')
+                        label(for="nombre")= 'Apellido 2'
+                        //- |Apellido3:
+                        input(type='text' name="apellido3" id="apellido3" placeholder='apellido3' class='form-control' ng-model="user.apellido3")
+                      div.col-xs-3
+                        br
+                        div.col-xs-12
+                          div.col-xs-6
+                            button#btnAdd1(type='button', class="btn btn-primary")
+                              span.glyphicon.glyphicon-plus  
+                          div.col-xs-6
+                            button#btnDel1(type='button', class="btn btn-danger")
+                              span.glyphicon.glyphicon-minus
+                      div.col-xs-12(ng-show='form.$submitted || form.apellido.$touched')
+                        div.warning(ng-show='form.apellido.$error.required') Introducir un Apellido.
+                    
+              //-visualización de alumno 
+              div.container(class='col-md-4')
+                div.panel.panel-default
+                  div.panel-heading Vista Alumno
+                  div.panel-body 
+                    a Matricula:
+                    p(ng-bind="user.matricula")
+                    a Nombre Completo:
+                    p(ng-bind="user.nombre+' '+user.nombre2+' '+user.nombre3+' '+user.apellido+' '+user.apellido2+' '+user.apellido3 ")
+                      
+              //- inserta tesis
+              div.container(class='col-md-8')
+                div.panel.panel-default
+                  div.panel-heading Datos Tesis
+                  div.panel-body 
+                    div.col-xs-12
+                      label(for="tt")= 'Titulo de tesis'
+                      input(type='text' name='tituloT' placeholder='Titulo de tesis' class='form-control' ng-model="user.tituloT" required='')
+                      div(ng-show='form.$submitted || form.tituloT.$touched')
+                        span.warning(ng-show='form.tituloT.$error.required') Introducir el Titulo de Tesis.
+                    div.col-xs-5
+                      label(for="mes")= 'Mes'
+                      select.form-control(name='mes'  ng-model="user.mes" required='')
+                        option(value='' disabled) Selecciona Mes
+                        option(value=1)='Enero'
+                        option(value=2)='Febrero'  
+                        option(value=3)='Marzo'
+                        option(value=4)='Abril'
+                        option(value=5)='Mayo'
+                        option(value=6)='Junio'
+                        option(value=7)='Julio'
+                        option(value=8)='Agosto'
+                        option(value=9)='Septiembre'
+                        option(value=10)='Octubre'
+                        option(value=11)='Noviembre'
+                        option(value=12)='Diciembre'
+                      div(ng-show='form.$submitted || form.mes.$touched')
+                          span.warning(ng-show='form.mes.$error.required') Introducir el Mes.
+                    div.col-xs-5
+                      label(for="ano")= 'Año'
+                      input#anio(type="number"  name="anio" min="1960" max=""  class='form-control' ng-model="user.ano" required='' )
+                      div(ng-show='form.$submitted || form.anio.$touched')
+                        span.warning(ng-show='form.anio.$error.required') Introducir el año de la Tesis.
+                        span.warning(ng-show='form.anio.$error.number') ¡El valor no es un Numero!
+                        span.warning(ng-show='form.anio.$error.min || form.anio.$error.max') ¡El valor debe estar en el rango de 1960 al año actual!
                                   
-            //-visualización de tesis
-            div.container(class='col-md-4')
-              div.panel.panel-default
-                div.panel-heading Vista Tesis
-                div.panel-body 
-                 a Titulo de Tesis:
-                 p {{tituloT}}
-                 a Mes:
-                 p {{mes}}
-                 a Año:
-                 p {{ano}}
-             //- inserta actas
-            div.container(class='col-md-8')
-              div.panel.panel-default
-                div.panel-heading Datos Acta
-                div.panel-body 
-                  div.col-xs-6
-                    label(for="folio")= 'Folio'
-                    input(type='text' name='folio' id='folio' placeholder='Folio' class='form-control' ng-model="folio")
-                  div.col-xs-6
-                    label(for="lugar")= 'Lugar'
-                    input(type='text' name='lugar' id='lugar' placeholder='Lugar' class='form-control' ng-model="lugar")
-                  div.col-xs-5
-                    label(for="grado")= 'Grado'
-                    select.form-control.text-all(name='grado'  ng-model="grado")
-                            option='seleccionar'
-                            option='Maestría'  
-                            option='Doctorado'
-            //-visualización de actas
-            div.container(class='col-md-4')
-              div.panel.panel-default
-                div.panel-heading Vista Acta
-                div.panel-body 
-                  a Folio:
-                  p {{folio}}
-                  a Lugar:
-                  p {{lugar}}
-                  a Grado:
-                  p {{grado}}
-              br
+              //-visualización de tesis
+              div.container(class='col-md-4')
+                div.panel.panel-default
+                  div.panel-heading Vista Tesis
+                  div.panel-body 
+                    a Titulo de Tesis:
+                    p(ng-bind="user.tituloT")
+                    a Mes:
+                    p(ng-bind="user.mes")
+                    a Año:
+                    p(ng-bind="user.ano")
 
-            div.container(class='col-md-12')
-              div.panel.panel-default
+              //- inserta actas
+              div.container(class='col-md-8')
+                div.panel.panel-default
+                  div.panel-heading Datos Acta
                   div.panel-body
-                    //- inserta director
-                    div.container(class='col-md-4')
-                      div.panel.panel-default
-                        div.panel-heading Director
-                        div.panel-body 
-                          div.col-xs6
-                            label(for="grado")= 'Director'
-                            select.form-control.text-all(name='director'  ng-model="director" placeholder='Seleccionar')
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
-                    //-inserta codirectores
-                    div.container(class='col-md-4')
-                      div.panel.panel-default
-                        div.panel-heading Co Directores
-                        div.panel-body
-                          label(for="grado")= 'Co Directores'
-                          select.form-control.text-all(name='director'  ng-model="codirector" placeholder='Seleccionar')
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
-                          br
-                          select.form-control.text-all(name='director'  ng-model="codirector1" placeholder='Seleccionar')
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
-                          br
-                          select.form-control.text-all(name='director'  ng-model="codirector2" placeholder='Seleccionar')
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
-                          br
-                          select.form-control.text-all(name='director'  ng-model="codirector3" placeholder='Seleccionar')
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
-                                  
-                    //-vista de directores y codirectores
-                    div.container(class='col-md-4')
-                      div.panel.panel-default
-                        div.panel-heading Vista Directores y Co Directores
-                        div.panel-body 
-                          a Director:
-                          p {{director}}
-                          a Co Directores
-                          p {{codirector}}
-                          p {{codirector1}}
-                          p {{codirector2}}
-                          p {{codirector3}}
-                          //- p {{codirector4}}
+                    div.col-xs-12 
+                      div.col-xs-6
+                        label(for="folio")= 'Folio'
+                        input(type='text' name='folio' id='folio' placeholder='Folio' class='form-control' ng-model="user.folio" required='')
+                        div(ng-show='form.$submitted || form.folio.$touched')
+                          span.warning(ng-show='form.folio.$error.required') Introducir el Folio.
+                      div.col-xs-6
+                        label(for="lugar")= 'Lugar'
+                        select.form-control(name='lugar'  ng-model="user.lugar" required='')
+                          option(value='' disabled) Selecciona Lugar
+                          -for item2 in items2
+                            option(value=item2.idunidad) #{item2.idunidad}-#{item2.nombre}
+                        div(ng-show='form.$submitted || form.lugar.$touched')
+                          span.warning(ng-show='form.lugar.$error.required') Introducir el Lugar.
+                    div.col-xs-12
+                      div.col-xs-6
+                        label(for="grado")= 'Grado'
+                        select.form-control(name='grado'  ng-model="user.grado" required='')
+                          option(value='' disabled) Selecciona Grado
+                          -for item in items
+                            option(value=item.idgrado) #{item.idgrado}-#{item.grado}
+                        div(ng-show='form.$submitted || form.grado.$touched')
+                          span.warning(ng-show='form.grado.$error.required') Introducir el Grado.
+                                
+              //-visualización de actas
+              div.container(class='col-md-4')
+                div.panel.panel-default
+                  div.panel-heading Vista Acta
+                  div.panel-body 
+                    a Folio:
+                    p(ng-bind="user.folio")
+                    a Lugar:
+                    p(ng-bind="user.lugar")
+                    a Grado:
+                    p(ng-bind="user.grado")
               
-            div.container(class='col-md-12')
-              div.panel.panel-default
-                  div.panel-body
-                    //- inserta sinodal
-                    div.container(class='col-md-5')
-                      div.panel.panel-default
-                        div.panel-heading Sinodal
-                        div.panel-body 
-                          label(for="grado")= 'Sinodales'
-                          select.form-control.text-all(name='sinodal'  ng-model="sinodal" placeholder='Seleccionar')
-                                  option='Máximo López López'  
-                                  option='Agustín Conde Gallardo'
-                                  option='Eloy Ayón Beato'
-
-                                  option='Ricardo López Fernández'
-                                  option='Pablo Roig Garcés'
-                                  option='Rafael Baquero Parra'
-                                  option='David Bermúdez Rosales'
-                                  option='Mauricio Carbajal Tinoco'
-                                  option='Heriberto Castilla Valdez'
-                                  option='Jorge Javier Castro Hernández'
-                                  option='J. Javier Cobos Martínez'
+              //-insertar Director y Codirectores
+              div.container(class='col-md-12')
+                div.panel.panel-default
+                    div.panel-body
+                      //- inserta director
+                      div.container(class='col-md-4')
+                        div.panel.panel-default
+                          div.panel-heading Director
+                          div.panel-body 
+                            div.col-xs6
+                              label(for="grado")= 'Director'
+                              select.form-control(name='director'  ng-model="user.director" required='')
+                                option(value='' disabled) Selecciona Director
+                                -for item3 in items3
+                                  option(value=item3.idpersona) #{item3.nombre} #{item3.nombre2} #{item3.nombre3} #{item3.apellido} #{item3.apellido2} #{item3.apellido3}
+                              
+                              div(ng-show='form.$submitted || form.director.$touched')
+                                span.warning(ng-show='form.director.$error.required') Introducir al Director.
+                      
+                      //-inserta codirectores
+                      div.container(class='col-md-4')
+                        div.panel.panel-default
+                          div.panel-heading Co Directores
+                          div.panel-body
+                            label(for="grado")= 'Co Directores'
+                            select.form-control.text-all(name='codirector'  ng-model="user.codirector")
+                                      option(value='') Sin codirector
+                                      option(value='1')='Máximo López López'  
+                                      option='Agustín Conde Gallardo'
+                                      option='Eloy Ayón Beato'
+                                      option='Ricardo López Fernández'
+                                      option='Pablo Roig Garcés'
+                                      option='Rafael Baquero Parra'
+                                      option='David Bermúdez Rosales'
+                                      option='Mauricio Carbajal Tinoco'
+                                      option='Heriberto Castilla Valdez'
+                                      option='Jorge Javier Castro Hernández'
+                                      option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='codirector1'  ng-model="user.codirector1" )
+                                      option(value='') Sin codirector 1
+                                      option='Máximo López López'  
+                                      option='Agustín Conde Gallardo'
+                                      option='Eloy Ayón Beato'
+                                      option='Ricardo López Fernández'
+                                      option='Pablo Roig Garcés'
+                                      option='Rafael Baquero Parra'
+                                      option='David Bermúdez Rosales'
+                                      option='Mauricio Carbajal Tinoco'
+                                      option='Heriberto Castilla Valdez'
+                                      option='Jorge Javier Castro Hernández'
+                                      option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='codirector2'  ng-model="user.codirector2" )
+                                      option(value='') Sin codirector 2
+                                      option='Máximo López López'  
+                                      option='Agustín Conde Gallardo'
+                                      option='Eloy Ayón Beato'
+                                      option='Ricardo López Fernández'
+                                      option='Pablo Roig Garcés'
+                                      option='Rafael Baquero Parra'
+                                      option='David Bermúdez Rosales'
+                                      option='Mauricio Carbajal Tinoco'
+                                      option='Heriberto Castilla Valdez'
+                                      option='Jorge Javier Castro Hernández'
+                                      option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='codirector3'  ng-model="user.codirector3" )
+                                      option(value='') Sin codirector 3
+                                      option='Máximo López López'  
+                                      option='Agustín Conde Gallardo'
+                                      option='Eloy Ayón Beato'
+                                      option='Ricardo López Fernández'
+                                      option='Pablo Roig Garcés'
+                                      option='Rafael Baquero Parra'
+                                      option='David Bermúdez Rosales'
+                                      option='Mauricio Carbajal Tinoco'
+                                      option='Heriberto Castilla Valdez'
+                                      option='Jorge Javier Castro Hernández'
+                                      option='J. Javier Cobos Martínez'
+                                    
+                      //-vista de directores y codirectores
+                      div.container(class='col-md-4')
+                        div.panel.panel-default
+                          div.panel-heading Vista Directores y Co Directores
+                          div.panel-body 
+                            a Director:
+                            p(ng-bind="user.director")
+                            a Co Directores
+                            p(ng-bind="user.codirector")
+                            p(ng-bind="user.codirector1")
+                            p(ng-bind="user.codirector2")
+                            p(ng-bind="user.codirector3")
+                            //- p {{codirector4}}
+              
+              //-insertar sinodales 
+              div.container(class='col-md-12')
+                div.panel.panel-default
+                    div.panel-body
+                      //- inserta sinodal
+                      div.container(class='col-md-5')
+                        div.panel.panel-default
+                          div.panel-heading Sinodal
+                          div.panel-body 
+                            label(for="grado")= 'Sinodales'
+                            select.form-control.text-all(name='sinodal'  ng-model="user.sinodal")
+                                    option(value='') Sin Sinodal
+                                    option='Máximo López López'  
+                                    option='Agustín Conde Gallardo'
+                                    option='Eloy Ayón Beato'
+                                    option='Ricardo López Fernández'
+                                    option='Pablo Roig Garcés'
+                                    option='Rafael Baquero Parra'
+                                    option='David Bermúdez Rosales'
+                                    option='Mauricio Carbajal Tinoco'
+                                    option='Heriberto Castilla Valdez'
+                                    option='Jorge Javier Castro Hernández'
+                                    option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='sinodal2'  ng-model="user.sinodal2")
+                                    option(value='')  Sin Sinodal 2
+                                    option='Máximo López López'  
+                                    option='Agustín Conde Gallardo'
+                                    option='Eloy Ayón Beato'
+                                    option='Ricardo López Fernández'
+                                    option='Pablo Roig Garcés'
+                                    option='Rafael Baquero Parra'
+                                    option='David Bermúdez Rosales'
+                                    option='Mauricio Carbajal Tinoco'
+                                    option='Heriberto Castilla Valdez'
+                                    option='Jorge Javier Castro Hernández'
+                                    option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='sinodal3'  ng-model="user.sinodal3")
+                                    option(value='')  Sin Sinodal 3
+                                    option='Máximo López López'  
+                                    option='Agustín Conde Gallardo'
+                                    option='Eloy Ayón Beato'
+                                    option='Ricardo López Fernández'
+                                    option='Pablo Roig Garcés'
+                                    option='Rafael Baquero Parra'
+                                    option='David Bermúdez Rosales'
+                                    option='Mauricio Carbajal Tinoco'
+                                    option='Heriberto Castilla Valdez'
+                                    option='Jorge Javier Castro Hernández'
+                                    option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='sinodal4'  ng-model="user.sinodal4" )
+                                    option(value='') Sin codirector 4
+                                    option='Máximo López López'  
+                                    option='Agustín Conde Gallardo'
+                                    option='Eloy Ayón Beato'
+                                    option='Ricardo López Fernández'
+                                    option='Pablo Roig Garcés'
+                                    option='Rafael Baquero Parra'
+                                    option='David Bermúdez Rosales'
+                                    option='Mauricio Carbajal Tinoco'
+                                    option='Heriberto Castilla Valdez'
+                                    option='Jorge Javier Castro Hernández'
+                                    option='J. Javier Cobos Martínez'
+                            br
+                            select.form-control.text-all(name='sinodal5'  ng-model="user.sinodal5")
+                                    option(value='') Sin Sinodal 5
+                                    option='Máximo López López'  
+                                    option='Agustín Conde Gallardo'
+                                    option='Eloy Ayón Beato'
+                                    option='Ricardo López Fernández'
+                                    option='Pablo Roig Garcés'
+                                    option='Rafael Baquero Parra'
+                                    option='David Bermúdez Rosales'
+                                    option='Mauricio Carbajal Tinoco'
+                                    option='Heriberto Castilla Valdez'
+                                    option='Jorge Javier Castro Hernández'
+                                    option='J. Javier Cobos Martínez'
+                      //-vista de directores y codirectores
+                      div.container(class='col-md-5')
+                        div.panel.panel-default
+                          div.panel-heading Vista Sinodal
+                          div.panel-body 
+                            a Sinodales:
+                            p(ng-bind="user.sinodal")
+                            p(ng-bind="user.sinodal2")
+                            p(ng-bind="user.sinodal3")
+                            p(ng-bind="user.sinodal4")
+                            p(ng-bind="user.sinodal5")
+             
+              //-inserta sinodales invitados
+              div.container(class='col-md-8')
+                div.panel.panel-default
+                  div.panel-heading Sinodal Invitado
+                  div.panel-body 
+                    form(name="form1" autocomplete="off")
+                      div.col-xs-12
+                        div.col-xs-3(id="sinodal1" class="clonedInput")
+                          label(for="nombre")= 'Nombre'
+                          //-|Nombre:
+                          input(type='text' name="sinodal" id="sinodal" placeholder='sinodal' class='form-control' , ng-model='addName', ng-change='addTemp()' )
+                        div.col-xs-3(id="sinodal2" class="clonedInput" style='display:none;')
+                          label(for="nombre")= 'Nombre1'
+                          input(type='text' name="sinodal2" id="sinodal2" placeholder='sinodal2' class='form-control' , ng-model='addName1', ng-change='addTemp()')
+                        div.col-xs-3(id="sinodal3" class="clonedInput" style='display:none;')
+                          label(for="nombre")= 'Nombre2'
+                          //- |Nombre3:
+                          input(type='text' name="sinodal3" id="sinodal3" placeholder='sinodal3' class='form-control' , ng-model='addName2', ng-change='addTemp()')                    
+                        div.col-xs-3
                           br
-                          select.form-control.text-all(name='sinodal2'  ng-model="sinodal2" placeholder='Seleccionar')
-                                  option='Máximo López López'  
-                                  option='Agustín Conde Gallardo'
-                                  option='Eloy Ayón Beato'
-                                  option='Ricardo López Fernández'
-                                  option='Pablo Roig Garcés'
-                                  option='Rafael Baquero Parra'
-                                  option='David Bermúdez Rosales'
-                                  option='Mauricio Carbajal Tinoco'
-                                  option='Heriberto Castilla Valdez'
-                                  option='Jorge Javier Castro Hernández'
-                                  option='J. Javier Cobos Martínez'
+                          center
+                            button#btnAddsinodal(type='button', class="btn btn-primary")
+                              span.glyphicon.glyphicon-plus
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            button#btnDelsinodal(type='button', class="btn btn-danger")
+                              span.glyphicon.glyphicon-minus
+                      div.col-xs-12
+                        div.col-xs-3(id="sinodalap1" class="clonedInputA")
+                          label(for="nombre")= 'Apellido'
+                          //- |Apellido:
+                          input(type='text' name="apellidos" id="apellidos" placeholder='apellido' class='form-control', ng-model='addApsinodal', ng-change='addTemp()' )
+                        div.col-xs-3(id="sinodalap2" class="clonedInputA" style='display:none;')
+                          label(for="nombre")= 'Apellido2'
+                          //- |Apellido2:
+                          input(type='text' name="apellidos2" id="apellidosi2" placeholder='apellido2' class='form-control' , ng-model='addApsinodal1', ng-change='addTemp()' )
+                        div.col-xs-3(id="sinodalap3" class="clonedInputA" style='display:none;')
+                          label(for="nombre")= 'Apellido3'
+                          //- |Apellido3:
+                          input(type='text' name="apellidos3" id="apellidos3" placeholder='apellido3' class='form-control' , ng-model='addApsinodal2', ng-change='addTemp()')
+                        div.col-xs-3
                           br
-                          select.form-control.text-all(name='sinodal3'  ng-model="sinodal3" placeholder='Seleccionar')
-                                  option='Máximo López López'  
-                                  option='Agustín Conde Gallardo'
-                                  option='Eloy Ayón Beato'
-                                  option='Ricardo López Fernández'
-                                  option='Pablo Roig Garcés'
-                                  option='Rafael Baquero Parra'
-                                  option='David Bermúdez Rosales'
-                                  option='Mauricio Carbajal Tinoco'
-                                  option='Heriberto Castilla Valdez'
-                                  option='Jorge Javier Castro Hernández'
-                                  option='J. Javier Cobos Martínez'
+                          center
+                            button#btnAddsinodalap(type='button', class="btn btn-primary")
+                              span.glyphicon.glyphicon-plus
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            button#btnDelsinodalap(type='button', class="btn btn-danger")
+                              span.glyphicon.glyphicon-minus
+                        div.col-xs-10
+                            label(for="institucion")= 'Institución'
+                            input(type='text' name='institucion' id='institucion'  class='form-control' , ng-model='institucionsino', ng-change='addTemp()')
+                        div.col-xs-10
+                            label(for="cargo")= 'Cargo'
+                            input(type='text' name='cargo' id='cargo'  class='form-control', ng-model='cargosino', ng-change='addTemp()')
+                        //- div.col-xs-10
+                        //-     label(for="grado")= 'Grado'
+                        //-     input(type='text' name='grado' id='grado' class='form-control' , ng-model='gradosino', ng-change='addTemp()')
+                        div.col-xs-12
                           br
-                          select.form-control.text-all(name='sinodal4'  ng-model="sinodal4" placeholder='Seleccionar')
-                                  option='Máximo López López'  
-                                  option='Agustín Conde Gallardo'
-                                  option='Eloy Ayón Beato'
-                                  option='Ricardo López Fernández'
-                                  option='Pablo Roig Garcés'
-                                  option='Rafael Baquero Parra'
-                                  option='David Bermúdez Rosales'
-                                  option='Mauricio Carbajal Tinoco'
-                                  option='Heriberto Castilla Valdez'
-                                  option='Jorge Javier Castro Hernández'
-                                  option='J. Javier Cobos Martínez'
-                          br
-                          select.form-control.text-all(name='sinodal5'  ng-model="sinodal5" placeholder='Seleccionar')
-                                  option='Máximo López López'  
-                                  option='Agustín Conde Gallardo'
-                                  option='Eloy Ayón Beato'
-                                  option='Ricardo López Fernández'
-                                  option='Pablo Roig Garcés'
-                                  option='Rafael Baquero Parra'
-                                  option='David Bermúdez Rosales'
-                                  option='Mauricio Carbajal Tinoco'
-                                  option='Heriberto Castilla Valdez'
-                                  option='Jorge Javier Castro Hernández'
-                                  option='J. Javier Cobos Martínez'
-                    //-vista de directores y codirectores
-                    div.container(class='col-md-5')
-                      div.panel.panel-default
-                        div.panel-heading Vista Sinodal
-                        div.panel-body 
-                          a Sinodales:
-                          p {{sinodal}}
-                          p {{sinodal2}}
-                          p {{sinodal3}}
-                          p {{sinodal4}}
-                          p {{sinodal5}}
-                    //-inserta sinodales invitados
-                    div.container(class='col-md-8')
-                      div.panel.panel-default
-                        div.panel-heading Sinodal Invitado
-                        div.panel-body 
-                          div.col-xs-12
-                            div.col-xs-3(id="sinodal1" class="clonedInput")
-                              label(for="nombre")= 'Nombre'
-                              //-|Nombre:
-                              input(type='text' name="sinodal" id="sinodal" placeholder='sinodal' class='form-control' , ng-model='addName', ng-change='addTemp()' )
-                            div.col-xs-3(id="sinodal2" class="clonedInput" style='display:none;')
-                              label(for="nombre")= 'Nombre1'
-                              input(type='text' name="sinodal2" id="sinodal2" placeholder='sinodal2' class='form-control' , ng-model='addName1', ng-change='addTemp()')
-                            div.col-xs-3(id="sinodal3" class="clonedInput" style='display:none;')
-                              label(for="nombre")= 'Nombre2'
-                              //- |Nombre3:
-                              input(type='text' name="sinodal3" id="sinodal3" placeholder='sinodal3' class='form-control' , ng-model='addName2', ng-change='addTemp()')                    
-                            div.col-xs-3
-                              br
-                              center
-                                button#btnAddsinodal(type='button', class="btn btn-primary")
-                                  span.glyphicon.glyphicon-plus
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                button#btnDelsinodal(type='button', class="btn btn-danger")
-                                  span.glyphicon.glyphicon-minus
-                          div.col-xs-12
-                            div.col-xs-3(id="sinodalap1" class="clonedInputA")
-                              label(for="nombre")= 'Apellido'
-                              //- |Apellido:
-                              input(type='text' name="apellidos" id="apellidos" placeholder='apellido' class='form-control', ng-model='addApsinodal', ng-change='addTemp()' )
-                            div.col-xs-3(id="sinodalap2" class="clonedInputA" style='display:none;')
-                              label(for="nombre")= 'Apellido2'
-                              //- |Apellido2:
-                              input(type='text' name="apellidos2" id="apellidosi2" placeholder='apellido2' class='form-control' , ng-model='addApsinodal1', ng-change='addTemp()' )
-                            div.col-xs-3(id="sinodalap3" class="clonedInputA" style='display:none;')
-                              label(for="nombre")= 'Apellido3'
-                              //- |Apellido3:
-                              input(type='text' name="apellidos3" id="apellidos3" placeholder='apellido3' class='form-control' , ng-model='addApsinodal2', ng-change='addTemp()')
-                            div.col-xs-3
-                              br
-                              center
-                                button#btnAddsinodalap(type='button', class="btn btn-primary")
-                                  span.glyphicon.glyphicon-plus
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                button#btnDelsinodalap(type='button', class="btn btn-danger")
-                                  span.glyphicon.glyphicon-minus
-                            div.col-xs-10
-                                label(for="institucion")= 'Institución'
-                                input(type='text' name='institucion' id='institucion'  class='form-control' , ng-model='institucionsino', ng-change='addTemp()')
-                            div.col-xs-10
-                                label(for="cargo")= 'Cargo'
-                                input(type='text' name='cargo' id='cargo'  class='form-control', ng-model='cargosino', ng-change='addTemp()')
-                            //- div.col-xs-10
-                            //-     label(for="grado")= 'Grado'
-                            //-     input(type='text' name='grado' id='grado' class='form-control' , ng-model='gradosino', ng-change='addTemp()')
-                            div.col-xs-12
-                              br
-                              input.btn.btn-primary.pull-right(type='submit', ng-click='addRow()', ng-show='addName && addApsinodal', value='+ Agregar')
-                          
-                    //-visualización de alumno 
-                    div.container(class='col-md-4')
-                      div.panel.panel-default
-                        div.panel-heading Vista Sinodal Invitado
-                           h5 {{rows.length}} Sinodales {{plural(rows)}} 
-                        div.panel-body 
-                          div.container(class="table-responsive" )
-                            div(ng-repeat='row in rows ', ng-class="{'muted':isTemp($index)}") 
-                              font(size=2)
-                                h4 Sinodal N° {{$index+1}}
-                                div.col-xs-10
-                                  a Nombre Completo:
-                                  h5 {{row.addName}} {{row.addName1}} {{row.addName2}} {{row.addApsinodal}} {{row.addApsinodal1}} {{row.addApsinodal2}}
-                                  a Institución:
-                                  h5 {{row.institucionsino}}
-                                  a Cargo:
-                                  h5 {{row.cargosino}}
-                                div.col-xs-2
-                                  button.btn.btn-danger.btn-mini(ng-click='deleteRow(row)', ng-hide='isTemp($index)')
-                                    i.glyphicon.glyphicon-trash
-            div.container(class='col-md-12')
-              div.container
-                #JSON
-                button.pull-right(type='submit', class="btn btn-primary", ng-click='insertar()') Insertar Datos      
-
-
-                  
+                          input.btn.btn-primary.pull-right(type='submit',form="form1" ng-click='addRow()', ng-show='addName && addApsinodal', value='+ Agregar')
+                    
+              //-visualización de alumno 
+              div.container(class='col-md-4')
+                div.panel.panel-default
+                  div.panel-heading Vista Sinodal Invitado
+                    //- h5(ng-bind="rows.length+' '+ Sinodales+' '+plural(rows)")
+                    h5 {{rows.length}} Sinodales {{plural(rows)}} 
+                  div.panel-body 
+                    div.container(class="table-responsive" )
+                      div(ng-repeat='row in rows ', ng-class="{'muted':isTemp($index)}") 
+                        font(size=2)
+                          h4 Sinodal N° {{$index+1}}
+                          div.col-xs-10
+                            a Nombre Completo:
+                            h5 {{row.addName}} {{row.addName1}} {{row.addName2}} {{row.addApsinodal}} {{row.addApsinodal1}} {{row.addApsinodal2}}
+                            a Institución:
+                            h5 {{row.institucionsino}}
+                            a Cargo:
+                            h5 {{row.cargosino}}
+                          div.col-xs-2
+                            button.btn.btn-danger.btn-mini(ng-click='deleteRow(row)', ng-hide='isTemp($index)')
+                              i.glyphicon.glyphicon-trash
+              div.container(class='col-md-12')
+                div.container
+                  #JSON
+                  //- button(type='submit', ng-click='update(user)') Guardar
+                  button.pull-right(type='submit', class="btn btn-primary", ng-click='insertar(user)') Insertar Datos  
+              //- label
+              //- | E-mail:
+              //- input(type='email', ng-model='user.email', name='uEmail', required='')
+              //- br
+              //- div(ng-show='form.$submitted || form.uEmail.$touched')
+              //-   span(ng-show='form.uEmail.$error.required') Tell us your email.
+                      
+              //-   span(ng-show='form.uEmail.$error.email') Este no es un correo electrónico válido.    Introducir el Folio.
+                div
+                    button(ng-click="reset()") Reset
+                    
+                pre user = {{user | json}}
+                pre master = {{master | json}}
+  script(type='text/javascript', src='/javascripts/infoInputs.js' )           
+  script(type='text/javascript', src='/javascripts/inputs.js')         
+  script(type='text/javascript', src='/vendor/bootstrap-sweetalert/dist/sweetalert.min.js')        
+                    
             
-            
-    

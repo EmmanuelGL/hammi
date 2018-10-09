@@ -1,3 +1,75 @@
+//- extends ../templates/default
+//- block content
+//-    script(type='text/javascript', src='/javascripts/table.js')
+//-    script(src='https://code.jquery.com/jquery-3.3.1.js')
+//-    script(src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+  
+//-    link(rel='stylesheet', href='/stylesheets/tab.css')      
+//-    link(rel="stylesheet", href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css")
+//-    link(rel="stylesheet", href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css")
+//-    div.ingreso(style='margin-top:50px' ng-app="muestra" ng-controller="tabla" ng-cloak)
+//-       div.panel
+//-         div.box-body(style='min-height: 700px; ')
+//-           div.jumbotron(style='background: white')
+//-             div.container.text-all
+//-                 div.row
+//-                     div.col-md-3
+//-                         div.well.well-sm
+//-                             form.form-horizontal
+//-                                 a.text-center.text-all Tabla 
+//-                                 div
+//-                                     //- select(ng-options="item.title for item in fieldTable" ng-model="selectActas" ng-change="selecttable()")
+//-                                     select.form-control(id='selectActas', name='selectActas',ng-model="selectActas"  ng-change="selecttable()")
+//-                                         option(value='' disabled) Selecciona Tabla 
+//-                                         option(ng-repeat="x in tipo" value="{{x.value}}"){{x.select}}                                          
+//-                 div.alert.alert-info(ng-show="selectActas== undefined")
+//-                     strong(style='text-align:center;')  Atención!    :
+//-                         a Selecciona una Vista....  
+//-                 div( ng-repeat="elem in tipo")               
+//-                     h1(style='text-align:center;'  ng-repeat="x in elem" ng-if="selectActas == x"){{elem.select}}
+//-                 div(ng-show="selectActas !== undefined") 
+//-                     div.container
+//-                         div.container           
+//-                             //- div.row
+//-                             //-     div.col-md-12
+//-                             //-         div.well.well-sm
+                                        
+//-                             //-                 .input-group.col-md-12  
+//-                             //-                     .col-md-4 
+//-                             //-                         .input-group
+//-                             //-                             .input-group-addon 
+//-                             //-                                 label.control-label mostrar 
+//-                             //-                             .inputGroupContainer
+//-                             //-                                 select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-click='informa();configPages(); ')
+//-                             //-                                     //- option(value='') --Elige opcion--    
+//-                             //-                     .col-md-4
+//-                             //-                         .input-group
+//-                             //-                             .input-group-addon
+//-                             //-                                 span.fa.fa-search
+//-                             //-                             input.form-control(type='text', ng-model='searchUserTerm', placeholder='Buscar...')
+                                        
+                                                
+//-                             div(class='table-responsive')    
+//-                                 //- table#local.table.table-striped.table-bordered(ng-init='configPages();')
+//-                                 //-     thead(bgcolor="#34495E")
+//-                                 //-         tr
+//-                                 //-             th.text-center(ng-repeat="elem in titulos"){{elem.column_name | uppercase }}
+//-                                 //-     tbody(bgcolor="#8D9EAF")
+//-                                 //-         tr(ng-repeat="elem1 in personas  | orderBy:sortName:sortReverse | filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize")
+//-                                 //-             td.text-center(ng-repeat="z in elem1" ){{z}}  
+//-                                 //- .btn-group
+//-                                 //-     button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+//-                                 //-     button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+//-                                 //-     button.btn.btn-default(type='button', ng-disabled='currentPage >= personas.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »                                                                            
+//-                                 table#local.table.table-striped.table-bordered(ng-init='configPages();')
+//-                                     thead(bgcolor="#34495E")
+//-                                         tr.head
+//-                                         //-     th.text-center(ng-repeat="elem in titulos"){{elem.column_name | uppercase }}
+//-                                     tbody(bgcolor="#8D9EAF")
+//-                                         tr(ng-repeat="elem1 in personas")
+//-                                             td.text-center(ng-repeat="z in elem1" ){{z}}  
+                               
+
 extends ../templates/default
 include ../templates/dependencies
 link(rel='stylesheet', href='/stylesheets/tab.css')
@@ -15,42 +87,29 @@ block content
                                 a.text-center Vista
                                 div
                                     select.form-control(name='Busqueda',onChange="this.form.submit()")
-                                        option='Elige una opción'
-                                        option='Departamento'  
-                                        option='Especialidad'
-                                        option='Grado'
-                                        option='Genero'
-                                        option='Departamento y Grados'
-                                        option='Especialidad y Departamentos'
+                                        option(value='' disabled selected)='Elige una opción'
+                                        option(value='v_departamentoa')='Departamento'  
+                                        //- option(value='v_especialidada')='Especialidad'
+                                        option(value='v_gradoa')='Grado'
+                                        option(value='v_generoa')='Genero'
+                                        option(value='v_deptogradoa')='Departamento y Grados'
+                                        //- option(value='v_especialidaddeptoa')='Especialidad y Departamentos'
                                          
-                -if(!items)
+                -if(items.length < 1)
                     div.alert.alert-info
                         strong(style='text-align:center;')  Atención!    :
-                            a Selecciona una Vista....                  
-                h1(style='text-align:center;') #{title}                  
-                div(class='table-responsive' )    
-                    table#local.table.table-striped.table-bordered
-                        thead(bgcolor="#34495E")
-                            tr
-                               - if(items)  
-                                    -each item in items
-                                        th.text-center= item.Field
-                        tbody(bgcolor="#8D9EAF")
-                            -if(items1)
+                            a Selecciona una Vista....   
+                - if(items && items1)             
+                    h1(style='text-align:center;') #{title}                  
+                    div(class='table-responsive' )    
+                        table#local.table.table-striped.table-bordered
+                            thead(bgcolor="#34495E")
+                                tr
+                                    -for item in items
+                                        th.may.text-center= item.column_name
+                            tbody(bgcolor="#8D9EAF")
                                 -for item1 in items1
                                     tr
-                                        -for val,key in item1
+                                        -for val in item1
                                             td.text-center #{val}
                                        
-                                       
-                                        
-                                                           
-                                   
-                                            
-                           
-                                
-                                
-                                
-                                        
-                        
-                                            

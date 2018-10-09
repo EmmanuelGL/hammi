@@ -6,11 +6,48 @@
 
  License: www.highcharts.com/license
 */
-(function(k){"object"===typeof module&&module.exports?module.exports=k:k(Highcharts)})(function(k){(function(f){var k=f.defaultOptions,A=f.doc,B=f.Chart,x=f.addEvent,H=f.removeEvent,E=f.fireEvent,p=f.createElement,C=f.discardElement,v=f.css,n=f.merge,q=f.pick,h=f.each,F=f.objectEach,t=f.extend,I=f.isTouchDevice,D=f.win,G=D.navigator.userAgent,J=f.Renderer.prototype.symbols;/Edge\/|Trident\/|MSIE /.test(G);/firefox/i.test(G);t(k.lang,{printChart:"Imprimir",downloadPNG:"Descargar imagen PNG",downloadJPEG:"Descargar imagen JPEG ",
-downloadPDF:"Descargar documento PDF",downloadSVG:"Descargar imagen vector SVG ",contextButtonTitle:"menu"});k.navigation={buttonOptions:{theme:{},symbolSize:14,symbolX:12.5,symbolY:10.5,align:"right",fontFamily:"'Unica One', sans-serif",buttonSpacing:3,height:22,verticalAlign:"top",fontFamily:"'Unica One', sans-serif",width:24}};n(!0,k.navigation,{menuStyle:{border:"1px solid #999999",background:"#ffffff",fontFamily:"'Unica One', sans-serif",padding:"5px 0"},menuItemStyle:{padding:"0.5em 1em",background:"none",color:"#333333",fontFamily:"'Unica One', sans-serif",fontSize:I?"14px":"11px",transition:"background 250ms, color 250ms"},menuItemHoverStyle:{background:"#335cad",
-color:"#ffffff",fontFamily:"'Unica One', sans-serif"},buttonOptions:{symbolFill:"#666666",fontFamily:"'Unica One', sans-serif",symbolStroke:"#666666",symbolStrokeWidth:3,theme:{fill:"#ffffff",fontFamily:"'Unica One', sans-serif",stroke:"none",padding:5}}});k.exporting={type:"image/png",url:"https://export.highcharts.com/",printMaxWidth:780,scale:2,buttons:{contextButton:{className:"highcharts-contextbutton",menuClassName:"highcharts-contextmenu",symbol:"menu",_titleKey:"contextButtonTitle",menuItems:"printChart separator downloadPNG downloadJPEG downloadPDF downloadSVG".split(" ")}},menuItemDefinitions:{printChart:{textKey:"printChart",
-onclick:function(){this.print()}},separator:{separator:!0},downloadPNG:{textKey:"downloadPNG",onclick:function(){this.exportChart()}},downloadJPEG:{textKey:"downloadJPEG",onclick:function(){this.exportChart({type:"image/jpeg"})}},downloadPDF:{textKey:"downloadPDF",onclick:function(){this.exportChart({type:"application/pdf"})}},downloadSVG:{textKey:"downloadSVG",onclick:function(){this.exportChart({type:"image/svg+xml"})}}}};f.post=function(a,b,e){var c=p("form",n({method:"post",action:a,enctype:"multipart/form-data"},
-e),{display:"none"},A.body);F(b,function(a,b){p("input",{type:"hidden",name:b,value:a},null,c)});c.submit();C(c)};t(B.prototype,{sanitizeSVG:function(a,b){if(b&&b.exporting&&b.exporting.allowHTML){var e=a.match(/<\/svg>(.*?$)/);e&&e[1]&&(e='\x3cforeignObject x\x3d"0" y\x3d"0" width\x3d"'+b.chart.width+'" height\x3d"'+b.chart.height+'"\x3e\x3cbody xmlns\x3d"http://www.w3.org/1999/xhtml"\x3e'+e[1]+"\x3c/body\x3e\x3c/foreignObject\x3e",a=a.replace("\x3c/svg\x3e",e+"\x3c/svg\x3e"))}a=a.replace(/zIndex="[^"]+"/g,
+(function(k){
+    "object"===typeof module&&module.exports?module.exports=k:k(Highcharts)
+})
+(function(k){
+    (function(f){
+        var k=f.defaultOptions,
+        A=f.doc,B=f.Chart,x=f.addEvent,H=f.removeEvent,E=f.fireEvent,
+        p=f.createElement,C=f.discardElement,v=f.css,n=f.merge,q=f.pick,
+        h=f.each,F=f.objectEach,t=f.extend,I=f.isTouchDevice,D=f.win,
+        G=D.navigator.userAgent,J=f.Renderer.prototype.symbols;/Edge\/|Trident\/|MSIE /.test(G);/firefox/i.test(G);
+        t(k.lang,{printChart:"Imprimir",downloadPNG:"Descargar imagen PNG",downloadJPEG:"Descargar imagen JPEG ",
+        downloadPDF:"Descargar documento PDF",downloadSVG:"Descargar imagen vector SVG ",contextButtonTitle:"menu"});
+        k.navigation={buttonOptions:{theme:{},
+        symbolSize:14,
+        symbolX:12.5,
+        symbolY:10.5,
+        align:"right",
+        fontFamily:"lato",
+        buttonSpacing:3,height:22,verticalAlign:"top",
+        fontFamily:"lato",
+        width:24}};
+        n(!0,k.navigation,
+            {menuStyle:{border:"1px solid #999999",background:"#ffffff",fontFamily:"lato",padding:"5px 0"},
+            menuItemStyle:{padding:"0.5em 1em",background:"none",color:"#333333",
+            fontFamily:"lato",fontSize:I?"14px":"11px",transition:"background 250ms, color 250ms"},
+            menuItemHoverStyle:{background:"#335cad",
+            color:"#ffffff",fontFamily:"lato"},
+            buttonOptions:{symbolFill:"#666666",fontFamily:"lato",symbolStroke:"#666666",
+            symbolStrokeWidth:3,theme:{fill:"#ffffff",fontFamily:"lato",stroke:"none",padding:5}}});
+            k.exporting={type:"image/png",url:"https://export.highcharts.com/",
+            printMaxWidth:780,scale:2,buttons:{contextButton:{className:"highcharts-contextbutton",
+            menuClassName:"highcharts-contextmenu",symbol:"menu",_titleKey:"contextButtonTitle",
+            menuItems:"printChart separator downloadPNG downloadJPEG downloadPDF downloadSVG".split(" ")}},
+            menuItemDefinitions:{printChart:{textKey:"printChart",
+            onclick:function(){this.print()}},separator:{separator:!0},
+            downloadPNG:{textKey:"downloadPNG",onclick:function(){this.exportChart()}},
+            downloadJPEG:{textKey:"downloadJPEG",onclick:function(){this.exportChart({type:"image/jpeg"})}},
+            downloadPDF:{textKey:"downloadPDF",onclick:function(){this.exportChart({type:"application/pdf"})}},
+            downloadSVG:{textKey:"downloadSVG",onclick:function(){this.exportChart({type:"image/svg+xml"})}}}};
+            f.post=function(a,b,e){var c=p("form",n({method:"post",action:a,enctype:"multipart/form-data"},
+            e),{display:"none"},A.body);F(b,function(a,b){p("input",{type:"hidden",name:b,value:a},null,c)});
+            c.submit();C(c)};t(B.prototype,{sanitizeSVG:function(a,b){if(b&&b.exporting&&b.exporting.allowHTML){var e=a.match(/<\/svg>(.*?$)/);e&&e[1]&&(e='\x3cforeignObject x\x3d"0" y\x3d"0" width\x3d"'+b.chart.width+'" height\x3d"'+b.chart.height+'"\x3e\x3cbody xmlns\x3d"http://www.w3.org/1999/xhtml"\x3e'+e[1]+"\x3c/body\x3e\x3c/foreignObject\x3e",a=a.replace("\x3c/svg\x3e",e+"\x3c/svg\x3e"))}a=a.replace(/zIndex="[^"]+"/g,
 "").replace(/isShadow="[^"]+"/g,"").replace(/symbolName="[^"]+"/g,"").replace(/jQuery[0-9]+="[^"]+"/g,"").replace(/url\(("|&quot;)(\S+)("|&quot;)\)/g,"url($2)").replace(/url\([^#]+#/g,"url(#").replace(/<svg /,'\x3csvg xmlns:xlink\x3d"http://www.w3.org/1999/xlink" ').replace(/ (|NS[0-9]+\:)href=/g," xlink:href\x3d").replace(/\n/," ").replace(/<\/svg>.*?$/,"\x3c/svg\x3e").replace(/(fill|stroke)="rgba\(([ 0-9]+,[ 0-9]+,[ 0-9]+),([ 0-9\.]+)\)"/g,'$1\x3d"rgb($2)" $1-opacity\x3d"$3"').replace(/&nbsp;/g,
 "\u00a0").replace(/&shy;/g,"\u00ad");this.ieSanitizeSVG&&(a=this.ieSanitizeSVG(a));return a},getChartHTML:function(){return this.container.innerHTML},getSVG:function(a){var b,e,c,w,m,g=n(this.options,a);e=p("div",null,{position:"absolute",top:"-9999em",width:this.chartWidth+"px",height:this.chartHeight+"px"},A.body);c=this.renderTo.style.width;m=this.renderTo.style.height;c=g.exporting.sourceWidth||g.chart.width||/px$/.test(c)&&parseInt(c,10)||600;m=g.exporting.sourceHeight||g.chart.height||/px$/.test(m)&&
 parseInt(m,10)||400;t(g.chart,{animation:!1,renderTo:e,forExport:!0,renderer:"SVGRenderer",width:c,height:m});g.exporting.enabled=!1;delete g.data;g.series=[];h(this.series,function(a){w=n(a.userOptions,{animation:!1,enableMouseTracking:!1,showCheckbox:!1,visible:a.visible});w.isInternal||g.series.push(w)});h(this.axes,function(a){a.userOptions.internalKey||(a.userOptions.internalKey=f.uniqueKey())});b=new f.Chart(g,this.callback);a&&h(["xAxis","yAxis","series"],function(c){var d={};a[c]&&(d[c]=a[c],

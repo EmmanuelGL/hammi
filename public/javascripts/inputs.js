@@ -4,8 +4,9 @@
             $('#btnAdd').click(function() {
                 var visible2 = $("#input2:visible").length > 0;
                 var visible1 = $("#input1:visible").length > 0;
-                if($("#input2:visible").length > 0 == false){
-                $('#btnDel').attr('disabled','');
+                if(visible2 == false){
+                //$('#btnDel').attr('disabled','');
+                $('#btnDel').prop("disabled", false);
                 $('#input2').show();
                 }
                 else if(visible1 == true && visible2 == true){
@@ -18,7 +19,8 @@
                 var visible3 = $("#input3:visible").length > 0;
                 var visible2 = $("#input2:visible").length > 0;
                 if($("#input3:visible").length > 0 == true){
-                $('#btnAdd').attr('disabled','');
+                // $('#btnAdd').attr('disabled','');
+                 $('#btnAdd').prop("disabled", false);
                // $("#input3")[0].reset();
                // $('#input3').attr('')
                 $('#input3').hide();
@@ -35,7 +37,7 @@
                 var visible2 = $("#inputA2:visible").length > 0;
                 var visible1 = $("#inputA1:visible").length > 0;
                 if(visible2 === false){
-                $('#btnDel1').attr('disabled','');
+                $('#btnDel1').prop("disabled", false);
                 $('#inputA2').show();
                 }
                 else if (visible2 === true){
@@ -48,7 +50,7 @@
                 var visible3 = $("#inputA3:visible").length > 0;
                 var visible2 = $("#inputA2:visible").length > 0;
                 if(visible3===true){
-                    $('#btnAdd1').attr('disabled','');
+                    $('#btnAdd1').prop("disabled", false);
                     $('#inputA3').hide();
                 }
                 else if (visible3 === false && visible2 === true ){
@@ -62,7 +64,7 @@
                 var visible2 = $("#sinodal2:visible").length > 0;
                 var visible1 = $("#sinodal1:visible").length > 0;
                 if(visible2 === false){
-                $('#btnDelsinodal').attr('disabled','');
+                $('#btnDelsinodal').prop("disabled", false);
                 $('#sinodal2').show();
                 }
                 else if (visible2 === true){
@@ -75,7 +77,7 @@
                 var visible3 = $("#sinodal3:visible").length > 0;
                 var visible2 = $("#sinodal2:visible").length > 0;
                 if(visible3===true){
-                    $('#btnAddsinodal').attr('disabled','');
+                    $('#btnAddsinodal').prop("disabled", false);
                     $('#sinodal3').hide();
                 }
                 else if (visible3 === false && visible2 === true ){
@@ -90,7 +92,7 @@
                 var visible2 = $("#sinodalap2:visible").length > 0;
                 var visible1 = $("#sinodalap1:visible").length > 0;
                 if(visible2 === false){
-                $('#btnDelsinodalap').attr('disabled','');
+                $('#btnDelsinodalap').prop("disabled", false);
                 $('#sinodalap2').show();
                 }
                 else if (visible2 === true){
@@ -103,7 +105,7 @@
                 var visible3 = $("#sinodalap3:visible").length > 0;
                 var visible2 = $("#sinodalap2:visible").length > 0;
                 if(visible3===true){
-                    $('#btnAddsinodalap').attr('disabled','');
+                    $('#btnAddsinodalap').prop("disabled", false);
                     $('#sinodalap3').hide();
                 }
                 else if (visible3 === false && visible2 === true ){

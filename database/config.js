@@ -1,10 +1,20 @@
 
-var config = {
-  	host : 'localhost',
-  	user : 'root',
-  	password : '',
-  	database : 'tesis'
-  }
+//conectar con mysql
+// var config = {
+//   	host : 'localhost',
+//   	user : 'root',
+//   	password : '',
+//   	database : 'tesis'
+//   }
+
+// conectar con postgres
+  const config = {
+		user: 'postgres',
+		host: '127.0.0.1',
+		database: 'tesis',
+		password: 'root',
+		port: 5432,
+		}
   module.exports = config;
   
 

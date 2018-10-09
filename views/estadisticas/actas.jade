@@ -1,34 +1,29 @@
 extends ../templates/default
-
-
 block content
    script(type='text/javascript', src='/javascripts/graficas.js')
-  
-   //script(type='text/javascript', src='https://code.jquery.com/jquery-1.12.4.min.js')
    script(type='text/javascript', src='/javascripts/muestra.js')        
-   // jQuery
-   script(src='https://code.jquery.com/jquery-3.3.1.min.js', integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=', crossorigin='anonymous')
-   // App
-   script(src='/javascripts/prueba.js')
-   div.ingreso(style='margin-top:50px')
+   div.ingreso(style='margin-top:50px' ng-app="estadisticas" ng-controller="graficas" ng-cloak)
       div.panel
         div.box-body(style='min-height: 700px; ')
           div.jumbotron(style='background: white')
-            div.container
+            div.container.text-all
                 div.row
                     div.col-md-3
                         div.well.well-sm
-                            form.form-horizontal(action='/estadisticas/actas', method='post')
-                                a.text-center.text-all Estadística
+                            form.form-horizontal
+                                a.text-center.text-all Estadística {{selectActas}}
                                 div
-                                    select.form-control.text-all(name='Busqueda',onChange="this.form.submit()")
-                                        option='Elige una opción'
-                                        option='Departamento'  
-                                        option='Especialidad'
-                                        option='Grado'
-                                        option='Género'
-                                        option='Departamento y Grados'
-                                        option='Especialidad y Departamentos'
+                                    select.form-control(id='selectActas', name='selectActas',ng-model="selectActas" ng-click="selectgraficas()")
+                                        option(value='' disabled) Selecciona Grafica 
+                                        option(ng-repeat="x in tipo" value="{{x.value}}"){{x.select}} 
+                                    //- select.form-control(name='Busqueda',onChange="this.form.submit()")
+                                    //-     option='Elige una opción'
+                                    //-     option='Departamento'  
+                                    //-     option='Especialidad'
+                                    //-     option='Grado'
+                                    //-     option='Género'
+                                    //-     option='Departamento y Grados'
+                                    //-     option='Especialidad y Departamentos'
                     div.col-md-4(style='float: right;')
                         div.well.well-sm
                             form.form-horizontal(action='/estadisticas/actas', method='post')
@@ -37,17 +32,29 @@ block content
                                       span.input-group-addon
                                         i.glyphicon.glyphicon-calendar
                                       input#msg.form-control(type="month" name="mes" min="1960-01" placeholder='Introdusca un año')
-                -if(title!='Alumnos Graduados por Departamento y Grado' && title !='Alumnos Graduados por Especialidad y Departamento')    
-                    div.nav-tabs-custom(ng-controller='myCtrl')
-                        ul.nav.nav-tabs.pull-right
-                            li
-                                a.dona( data-target='#donut', data-toggle='tab')
-                                    i.fa.fa-pie-chart
-                                    |  DONA
-                            li.active
-                                a.barra(href='javascript:;', data-target='#bar', data-toggle='tab')
-                                    i.fa.fa-bar-chart
-                                    |  BARRAS
+
+                h2.text-all(style='text-align:center;' ng-repeat="elem in tipo") 
+                    a(ng-repeat="x in elem" ng-if="selectActas == x") {{elem.select}}
+                table#datatable
+                    thead
+                        tr
+                            th nombre
+                            th Total  
+                    tbody(ng-repeat="elem in grafica1")
+                       
+                       
+                div.nav-tabs-custom
+                    ul.nav.nav-tabs.pull-right
+                        li
+                            a.dona( data-target='#donut', data-toggle='tab')
+                                i.fa.fa-pie-chart
+                                |  DONA
+                        li.active
+                            a.barra(href='javascript:;', data-target='#bar', data-toggle='tab')
+                                i.fa.fa-bar-chart
+                                |  BARRAS
+                div#graficaA.graficaA
+                div#graficaB.graficaB(style='display:none;') 
                 -if(title =='Alumnos Graduados por Departamento y Grado' || title =='Alumnos Graduados por Especialidad y Departamento')
                     div.nav-tabs-custom(ng-controller='myCtrl')
                         ul.nav.nav-tabs.pull-right
@@ -55,57 +62,59 @@ block content
                                 a(href='javascript:;', data-target='#bar', data-toggle='tab')
                                     i.fa.fa-bar-chart
                                     |  BARRAS
+           
+              
             
-                -if(items1)
-                    h2.text-all(style='text-align:center;') #{title}
+                //- -if(items1)
+                //-     h2.text-all(style='text-align:center;') #{title}
                         
                         
-                    div#graficaA.graficaA
+                //-     div#graficaA.graficaA
                     
-                    div#graficaB.graficaB(style='display:none;') 
+                //-     div#graficaB.graficaB(style='display:none;') 
                     
-                    div#graficaA1
+                //-     div#graficaA1
                     
-                    table#datatable(style="display:none")
-                        thead
-                            tr
-                                th #{title}
-                                th Total  
-                        tbody
-                            -if(items1)
-                                    -for item1 in items1
-                                        tr
-                                            -for val,key in item1
-                                                td.text-center #{val}
+                //-     table#datatable()
+                //-         thead
+                //-             tr
+                //-                 th {{x.select}}
+                //-                 th Total  
+                //-         tbody
+                //-             -if(items1)
+                //-                     -for item1 in items1
+                //-                         tr
+                //-                             -for val,key in item1
+                //-                                 td.text-center #{val}
             
-                    table#datatable2(style="display:none")
-                        thead
-                            tr
-                                th
-                                th Jane
-                                th John
+                //-     table#datatable2(style="display:none")
+                //-         thead
+                //-             tr
+                //-                 th
+                //-                 th Jane
+                //-                 th John
                         
-                        tbody
-                            tr
-                                th Apples
-                                td 3
-                                td 4
-                            tr
-                                th Pears
-                                td 2
-                                td 0
-                            tr
-                                th Plums
-                                td 5
-                                td 11
-                            tr
-                                th Bananas
-                                td 1
-                                td 1
-                            tr
-                                th Oranges
-                                td 2
-                                td 4
+                //-         tbody
+                //-             tr
+                //-                 th Apples
+                //-                 td 3
+                //-                 td 4
+                //-             tr
+                //-                 th Pears
+                //-                 td 2
+                //-                 td 0
+                //-             tr
+                //-                 th Plums
+                //-                 td 5
+                //-                 td 11
+                //-             tr
+                //-                 th Bananas
+                //-                 td 1
+                //-                 td 1
+                //-             tr
+                //-                 th Oranges
+                //-                 td 2
+                //-                 td 4
                 //- h1 Ajax Tutorial
     
                 //-     button#getProducts

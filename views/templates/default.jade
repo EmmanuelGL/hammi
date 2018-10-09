@@ -1,7 +1,9 @@
 doctype html
 html
   head
-    title= title
+    if(title == null)
+      title borges
+    title=title
     include dependencies
   body(style="background-color:#C6DEDE;")   
     div#main

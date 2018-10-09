@@ -78,29 +78,4 @@ module.exports = {
 		});
 	}*/
 
-	getRegistro: function(req, res, next){
-			return res.render('users/registro',{
-				isAuthenticated : req.isAuthenticated(),
-				user : req.user
-			});
-	},
-	postInsert: function(req, res, next){
-		//verificar la forma de acceder
-		//const { name } = req.body;
-		//prueba
-		const {matricula} = req.body;
-		console.log('------------------prueba------------------')
-		console.log({matricula})
-		console.log("esta aqui lo enviado");
-		console.log(req.body)
-		res.json('Successfully updated --------si llega al back ');
-	},
-	getInsert: function(req, res, next){
-		return res.render('users/registro',{
-			isAuthenticated : req.isAuthenticated(),
-			user : req.user
-		});
-	},
-
-
 };

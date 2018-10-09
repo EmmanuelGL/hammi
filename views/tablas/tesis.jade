@@ -14,33 +14,40 @@ block content
                             form.form-horizontal(action='/tablas/tesis', method='post')
                                 a.text-center Vista
                                 div
-                                    select.form-control(name='Busqueda',onChange="this.form.submit()")
-                                        option='Elige una opción'
-                                        option='Departamento'  
-                                        option='Especialidad'
-                                        option='Grado'
-                                        option='Genero'
-                                        option='Departamento y Grados'
-                                        option='Especialidad y Departamentos'
+                                    select.form-control(name='Busquedat',onChange="this.form.submit()")
+                                        option(value='' disabled selected)='Elige una opción'
+                                        option(value='v_departamentot')='Departamento'  
+                                        //- option(value='v_especialidadt')='Especialidad'
+                                        option(value='v_gradot')='Grado'
+                                        option(value='v_generot')='Genero'
+                                        option(value='v_deptogradot')='Departamento y Grados'
+                                        //- option(value='v_especialidaddeptoa')='Especialidad y Departamentos'
+                                    //-  select.form-control(name='Busqueda',onChange="this.form.submit()")
+                                    //-     option='Elige una opción'
+                                    //-     option='v_departamentoa'  
+                                    //-     option='Especialidad'
+                                    //-     option='Grado'
+                                    //-     option='Genero'
+                                    //-     option='Departamento y Grados'
+                                    //-     option='Especialidad y Departamentos'
                                          
-                -if(!items)
+                -if(items.length < 1)
                             div.alert.alert-info
                                 strong(style='text-align:center;')  Atención!    :
                                     a Selecciona una Vista....
+                -if(items && items1)
                 h1.text-all(style='text-align:center;') #{title}                  
                 div(class='table-responsive' )    
                     table#local.table.table-striped.table.table.table-bordered 
                         thead(bgcolor="#34495E")
                             tr
-                               - if(items)  
-                                    -each item in items
-                                        th.text-center= item.Field
+                                -each item in items
+                                    th.may.text-center= item.column_name
                         tbody(bgcolor="#8D9EAF")
-                            -if(items1)
-                                -for item1 in items1
-                                    tr
-                                        -for val,key in item1
-                                            td.text-center #{val}
+                            -for item1 in items1
+                                tr
+                                    -for val in item1
+                                        td.text-center #{val}
                                        
                                        
                                         

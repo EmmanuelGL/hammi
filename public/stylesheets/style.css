@@ -9,3 +9,11 @@
 .text-all{
     font-family:'Lato';
 }
+.warning{
+    color:#FF0000;
+}
+.may{
+    
+        text-transform: uppercase;
+    
+}
