@@ -14,34 +14,32 @@ block content
                                     form.form-horizontal(action='/exportar/actas', method='post')
                                         a.text-center.text-all Vista
                                         div
-                                            select.text-all.form-control(name='Busqueda',onChange="this.form.submit()")
-                                                option='Elige una opción'
-                                                option='Departamento'  
-                                                option='Especialidad'
-                                                option='Grado'
-                                                option='Genero'
-                                                option='Departamento y Grados'
-                                                option='Especialidad y Departamentos'
+                                            select.form-control(name='Busqueda',onChange="this.form.submit()")
+                                                option(value='' disabled selected)='Elige una opción'
+                                                option(value='v_departamentoa')='Departamento'  
+                                                //- option(value='v_especialidada')='Especialidad'
+                                                option(value='v_gradoa')='Grado'
+                                                option(value='v_generoa')='Genero'
+                                                option(value='v_deptogradoa')='Departamento y Grados'
+                                                //- option(value='v_especialidaddeptoa')='Especialidad y Departamentos'
 
-                        -if(!items)
+                        -if(items.length < 1)
                             div.alert.alert-info
                                 strong.text-all(style='text-align:center;')  Atención!    :
                                     a.text-all Selecciona una Vista....
-                        -if(items)                            
+                        - if(items.length > 0)                             
                             h1.text-title.text-all(style='text-align:center;') Exportar #{title}                   
                             div.text-all(class='table-responsive' ) 
                                 table#example.display(cellspacing='0', width='100%')
                                     thead
                                         tr
-                                            - if(items)
-                                                -each item in items
-                                                    th.text-center(style="text-align: center")= item.Field
+                                            -each item in items
+                                                th.may.text-center(style="text-align: center")= item.column_name
                                     tbody
-                                        -if(items1)
-                                            -for item1 in items1
-                                                tr
-                                                    -for val,key in item1
-                                                        td.text-center #{val}
+                                        -for item1 in items1
+                                            tr
+                                                -for val,key in item1
+                                                    td.text-center #{val}
                                         
                     
                 
