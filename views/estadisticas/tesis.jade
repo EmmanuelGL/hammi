@@ -18,12 +18,15 @@ block content
                                         option(ng-repeat="x in tipo1" value="{{x.value}}"){{x.select}} 
                     div.col-md-4(style='float: right;')
                         div.well.well-sm
-                            form.form-horizontal(action='/estadisticas/tesis', method='post')
+                            form.form-horizontal
                                 a.text-center.text-all Período
                                 div.input-group
-                                      span.input-group-addon
+                                    span.input-group-addon
                                         i.glyphicon.glyphicon-calendar
-                                      input#msg.form-control(type="month" name="mes" min="1960-01" placeholder='Introdusca un año')
+                                    input.form-control(type="number", name="anio", min="1960", max="{{limit}}" , ng-model="anio", placeholder='Introdusca un año' ng-disabled="selectTesis == undefined")
+                                    span.input-group-btn
+                                        a.action.btn.btn-md.btn-info(data-tooltip='Ver',ng-click="anio == undefined || selectTesis == undefined ? true: selectgraficasaniot(title);anio=undefined",ng-disabled="anio == undefined || selectTesis == undefined")
+                                            i.fa.fa-eye
                 h2.text-all(style='text-align:center;') 
                     a {{title}}
                 table#datatable(style='display:none;') 
@@ -54,6 +57,8 @@ block content
                 
                 div.col-md-12(ng-show='title != "Departamento y Grados"')
                     div#graficaA.graficaA
+                div.col-md-12(ng-show='title != "Departamento y Grados"')
+
                     div#graficaB.graficaB(style='display:none;') 
                 div.col-md-12(ng-show='title == "Departamento y Grados"')
                     div#graficaA1.graficaA1

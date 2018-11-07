@@ -13,7 +13,7 @@ block content
                             form.form-horizontal
                                 a.text-center.text-all Estadística 
                                 div
-                                    select.form-control(id='selectActas', name='selectActas',ng-model="selectActas" ng-change="selectgraficas()")
+                                    select.form-control(id='selectActas', name='selectActas',ng-model="selectActas", ng-change="selectgraficas()")
                                         option(value='' disabled) Selecciona Grafica 
                                         option(ng-repeat="x in tipo" value="{{x.value}}"){{x.select}} 
                     div.col-md-4(style='float: right;')
@@ -25,7 +25,7 @@ block content
                                         i.glyphicon.glyphicon-calendar
                                     input.form-control(type="number", name="anio", min="1960", max="{{limit}}" , ng-model="anio", placeholder='Introdusca un año' ng-disabled="selectActas == undefined")
                                     span.input-group-btn
-                                        a.action.btn.btn-md.btn-info(data-tooltip='Ver',ng-click='anio == undefined || selectActas == undefined ? true: selectgraficasanio(title)',ng-disabled="anio == undefined || selectActas == undefined")
+                                        a.action.btn.btn-md.btn-info(data-tooltip='Ver',ng-click="anio == undefined || selectActas == undefined ? true: selectgraficasanio(title);anio=undefined",ng-disabled="anio == undefined || selectActas == undefined")
                                             i.fa.fa-eye
                 h2.text-all(style='text-align:center;') 
                     a {{title}}
@@ -58,6 +58,7 @@ block content
                 
                 div.col-md-12(ng-show='title != "Departamento y Grados"')
                     div#graficaA.graficaA
+                div.col-md-12(ng-show='title != "Departamento y Grados"')
                     div#graficaB.graficaB(style='display:none;') 
                 div.col-md-12(ng-show='title == "Departamento y Grados"')
                     div#graficaA1.graficaA1

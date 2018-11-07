@@ -1,92 +1,201 @@
-/*<ul id="ul-example" class="row-fluid">
-  <li class="span4" data-color="gray">
-    <div class="thumbnail">
-      <div class="thumbnail-image">
-        <img src="/images/dinosaurs/Stegosaurus_BW.jpg" />
-      </div>
-      <div class="caption">
-        <h3>Stegosaurus armatus</h3>
-        <p>State: Colorado</p>
-        <p>Year: 1982</p>
-        <p><a href="http://en.wikipedia.org/wiki/Stegosaurus" class="btn btn-primary">View</a> <a href="#" class="btn">View</a></p>
-      </div>
-    </div>
-  </li>
-  
-</ul>
+// var app = angular.module('consultas', ['ui.bootstrap','angucomplete-alt']);
+var app = angular.module('consultas', ['ui.bootstrap','ui.filters']);
+app.controller('query', function($scope, $http) {
+//año actual
+// $scope.fecha  = $filter('date')(new Date(),'dd-MM-yyyy');
+//$scope.ano = fecha.getFullYear();
+//autocomplete----------------------------------
+// $scope.selectedObj = {};
+//   $scope.nationalities = [  
+//      {
+//         "NATIONALITY_ID": 1,
+//         "description":"Afghan"
+//      },
+//      {  
+//         "NATIONALITY_ID": 2,
+//         "description":"Andorran"
+//      },
+//      {  
+//         "NATIONALITY_ID": 3,
+//         "description":"Botswanan"
+//      },
+//      {  
+//         "NATIONALITY_ID": 4,
+//         "description":"Brazilian"
+//      },
+//      {  
+//         "NATIONALITY_ID": 5,
+//         "description":"Canadian"
+//      },
+//      {
+//         "NATIONALITY_ID": 6,
+//         "description":"Cypriot"
+//      }
+//   ];
+//--------------------------------------
+//  $scope.todate=new Date();
+   $scope.example = {
+         value: new Date(),
+         currentDate: new Date(1960,01,01),
+         max: new Date()
+       };
 
-*//*
-$(document).ready( function() {
-  function ulWriter(rowIndex, record, columns, cellWriter) {
-    var cssClass = "span4", li;
-    if (rowIndex % 3 === 0) { cssClass += ' first'; }
-    li = '<li class="' + cssClass + '"><div class="thumbnail"><div class="panel-heading"><a>' + record.thumbnail + '</a></div><div class="caption">' + record.caption + '</div></div></li>';
-    return li;
+//-------------------------------
+$scope.filteredTodos = [],
+$scope.currentPage = 1,
+$scope.numPerPage = 5,
+$scope.maxSize = 5;
+//---------------------------------
+  $scope.tipo = [
+              {value : "alumno", select : "Alunmo"},
+              {value : "titulo", select : "Título"},
+              {value : "clasificacion", select : "Clasificación"},
+              {value : "especialidad", select : "Especialidad"},
+              {value : "departamento", select : "Departamento"},
+              {value : "grado", select : "Grado"},
+              {value : "fechapublicacion", select : "Fecha de Publicación"},
+              {value : "director", select : "Director"},
+              {value : "codirectores", select : "Codirectores"}
+              ];
+  $scope.actas = function(){
+    var pathname = window.location.pathname;
+    $http.get('/actas')
+			.then(function onSuccess(response) {
+      //  console.log(JSON.stringify(response.data))
+       $scope.items = response.data;
+			}, function onError(response){
+				var data = response.data;
+				console.log(data);
+			})
   }
+  $scope.tesis = function(){
+    $scope.items= []
+    $http.get('/tesis')
+			.then(function onSuccess(response) {
+      //  console.log(JSON.stringify(response.data))
+       $scope.items = response.data;
+       
+			}, function onError(response){
+				var data = response.data;
+				console.log(data);
+      })
+      .then($scope.makeTodos = function() {
+        $scope.items
+        // console.log(JSON.stringify($scope.items))
+      })
+      .then($scope.p= function(){
+        $scope.makeTodos(); 
+
+        $scope.numPages = function () {
+          return Math.ceil($scope.items.length / $scope.numPerPage);
+        };
   
-  // Function that creates our records from the DOM when the page is loaded
-  function ulReader(index, li, record) {
-    var $li = $(li),
-        $caption = $li.find('.caption');
-    record.thumbnail = $li.find('.panel-heading').html();
-    record.caption = $caption.html();
-    record.label = $caption.find('h3').text();
-    record.description = $caption.find('p').text();
-    record.color = $li.data('color');
+        $scope.$watch('currentPage + numPerPage', function() {
+          var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+          , end = begin + $scope.numPerPage;
+          
+          $scope.filteredTodos = $scope.items.slice(begin, end);
+        });
+      })
+     
+      // .then($scope.configPages = function () {
+      //   console.log($scope.items.length)
+      //   var items = $(".thumbnail");
+      //   var numItems = $scope.items.length;
+      //   var perPage = 5;
+
+      //   items.slice(perPage).hide();
+
+      //   $('#pagination-container').pagination({
+      //       items: numItems,
+      //       itemsOnPage: perPage,
+      //       prevText: "&laquo;",
+      //       nextText: "&raquo;",
+      //       cssStyle: 'dark-theme',
+      //       onPageClick: function (pageNumber) {
+      //           var showFrom = perPage * (pageNumber - 1);
+      //           var showTo = showFrom + perPage;
+      //           items.hide().slice(showFrom, showTo).show();
+      //       }
+      //   });
+      // })
   }
-  
-  $('#ul-example').dynatable({
-    table: {
-      bodyRowSelector: 'li'
-    },
-    dataset: {
-      perPageDefault: 5,
-      perPageOptions: [5,10]
-    },
-    writers: {
-      _rowWriter: ulWriter
-    },
-    readers: {
-      _rowReader: ulReader
-    },
-    params: {
-      records: 'kittens'
+  $scope.ordertesis = function(){
+    $scope.ordenado={
+      order : $scope.ordenar
     }
-  });
-});*/
+    // console.log(JSON.stringify($scope.ordenado))
+    var pathname = window.location.pathname;
+    $http.post(pathname, $scope.ordenado)
+			.then(function onSuccess(response) {
+      //  console.log(JSON.stringify(response.data))
+       $scope.items = response.data;
+      //  console.log(JSON.stringify($scope.items))
+			}, function onError(response){
+				var data = response.data;
+				console.log(data);
+      })
+      .then($scope.makeTodos = function() {
+        $scope.items
+        // console.log(JSON.stringify($scope.items))
+      })
+      .then($scope.p= function(){
+        
+        $scope.makeTodos(); 
 
+        $scope.numPages = function () {
+          return Math.ceil($scope.items.length / $scope.numPerPage);
+        };
+  
+        $scope.$watch('currentPage + numPerPage', function() {
+          var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+          , end = begin + $scope.numPerPage;
+          
+          $scope.filteredTodos = $scope.items.slice(begin, end);
+        });
+      })
+  }
+  $scope.busquedaT = function(){
+    $scope.ordenado={
+      order : $scope.ordenar
+    }
+    // console.log(JSON.stringify($scope.ordenado))
+    var pathname = window.location.pathname;
+    $http.post(pathname, $scope.ordenado)
+			.then(function onSuccess(response) {
+      //  console.log(JSON.stringify(response.data))
+       $scope.items = response.data;
+      //  console.log(JSON.stringify($scope.items))
+			}, function onError(response){
+				var data = response.data;
+				console.log(data);
+      })
+      .then($scope.makeTodos = function() {
+        $scope.items
+        // console.log(JSON.stringify($scope.items))
+      })
+      .then($scope.p= function(){
+        
+        $scope.makeTodos(); 
 
-/*$(document).ready(function() {
-  $('#local1').DataTable( {
-      dom: 'Bfrtip',
-      buttons: [
-          'copyHtml5',
-          'excelHtml5',
-          'csvHtml5',
-          'pdfHtml5'
-      ],
-      "oTableTools": {
-          "sSwfPath": "js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-        },
-        "language": {
-          "search": "Buscar:",
-          "zeroRecords": "No se encontraron datos",
-          "infoEmpty": "No hay datos para mostrar",
-          "info": "Mostrando del _START_ al _END_, de un total de _TOTAL_ entradas",
-          "paginate": {
-              "first": "Primeros",
-              "last": "Ultimos",
-              "next": "Siguiente",
-              "previous": "Anterior"
-          },
-      },
-  } );
-} );
-*/
-// $(document).ready(function(){
-//   $("#local").jPaginate();
-// });
-
-
+        $scope.numPages = function () {
+          return Math.ceil($scope.items.length / $scope.numPerPage);
+        };
+  
+        $scope.$watch('currentPage + numPerPage', function() {
+          var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+          , end = begin + $scope.numPerPage;
+          
+          $scope.filteredTodos = $scope.items.slice(begin, end);
+        });
+      })
+  }
+  $scope.limpiar = function(){
+   
+    $scope.form.$setPristine();
+    $scope.form.$setUntouched();   
+    $scope.busqueda = {};
+  }
+});
 
 

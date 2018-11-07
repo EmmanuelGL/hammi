@@ -24,11 +24,15 @@ router.get('/estadisticas/actas',AuthMiddleware.isLogged, controllers.Graphs.get
 router.post('/estadisticas/actas',AuthMiddleware.isLogged, controllers.Graphs.postActas);
 router.get('/estadisticas/tesis',AuthMiddleware.isLogged, controllers.Graphs.getTesis);
 router.post('/estadisticas/tesis',AuthMiddleware.isLogged, controllers.Graphs.postTesis)
+router.post('/periodo',AuthMiddleware.isLogged, controllers.Graphs.postPeriodo);
+router.post('/periodoT',AuthMiddleware.isLogged, controllers.Graphs.postPeriodoT);
 
 // rutas para las consultas de actas y tesis 
 router.get('/consultas/actas', AuthMiddleware.isLogged, controllers.Queries.getActas);
+router.get('/actas', AuthMiddleware.isLogged, controllers.Queries.getquery);
 router.post('/consultas/actas', AuthMiddleware.isLogged, controllers.Queries.postActas);
 router.get('/consultas/tesis', AuthMiddleware.isLogged, controllers.Queries.getTesis);
+router.get('/tesis', AuthMiddleware.isLogged, controllers.Queries.getquery1);
 router.post('/consultas/tesis', AuthMiddleware.isLogged, controllers.Queries.postTesis);
 
 // rutas para las exportaciones de tesis y actas 

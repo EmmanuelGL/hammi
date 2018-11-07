@@ -109,4 +109,110 @@ module.exports={
         });
 		//--------------Fin de la consulta---------//
     },
+    postPeriodo: function(req, res, next){
+        var select='', cab='';
+        const results = [];
+        title=[],encabezados=[], tipografica = req.body.grafica, anio= req.body.anio;
+        // console.log(req.body.grafica+'-----jajajajajaya we--------'+req.body.anio)
+        //--------------------Actas-------------------------
+        if(tipografica == 'Departamento'){
+            select= `select * from "Tesis".deptoA('${anio}-01-01','${anio}-12-31')`;
+            cab = "v_departamentoa"; 
+        }
+        if(tipografica == 'Grado'){
+            select=`select * from "Tesis".gradoA('${anio}-01-01','${anio}-12-31');`
+            cab = "v_gradoa"
+        }
+        if(tipografica == 'Género'){
+            select =`select * from "Tesis".generoA('${anio}-01-01','${anio}-12-31');`
+            cab = 'v_generoa'
+        }
+       
+        pg.connect(connectionString, (err, client, done) => {
+            if(err) {
+                done();
+                console.log(err);
+                return res.status(500).json({success: false, data: err});
+            }
+        //     //select * from "Tesis".deptoA('2000-01-01','2000-12-31');
+        //     var select ='SELECT * FROM "Tesis".'+req.body.grafica+';';
+            var query = client.query(select);
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            select =`SELECT column_name FROM information_schema.columns WHERE table_schema = 'Tesis'AND table_name   = '${cab}';`;
+            query = client.query(select);
+            query.on('row', (row) => {
+                
+                encabezados.push(row)
+                
+            });
+            query.on('end', () => {
+                done();
+               
+                title.push(req.body.grafica)
+                console.log("se cerro base de datos")
+                var contenido=[{
+                    grafica: results,
+                    title:title,
+                    encabezados:encabezados,
+                    subtitle: 'Periodo : '+anio
+                }]
+				return res.json(contenido);
+            });
+        });
+    },
+    postPeriodoT:function(req, res, next){
+        var select='', cab='';
+        const results = [];
+        title=[],encabezados=[], tipografica = req.body.grafica, anio= req.body.anio;
+        // console.log(req.body.grafica+'-----jajajajajaya we--------'+req.body.anio)
+        //--------------------Actas-------------------------
+        if(tipografica == 'Departamento'){
+            select= `select * from "Tesis".deptot(${anio})`;
+            cab = "v_departamentot"; 
+        }
+        if(tipografica == 'Grado'){
+            select=`select * from "Tesis".gradot(${anio});`
+            cab = "v_gradot"
+        }
+        if(tipografica == 'Género'){
+            select =`select * from "Tesis".generot(${anio});`
+            cab = 'v_generot'
+        }
+       
+        pg.connect(connectionString, (err, client, done) => {
+            if(err) {
+                done();
+                console.log(err);
+                return res.status(500).json({success: false, data: err});
+            }
+        //     //select * from "Tesis".deptoA('2000-01-01','2000-12-31');
+        //     var select ='SELECT * FROM "Tesis".'+req.body.grafica+';';
+            var query = client.query(select);
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            select =`SELECT column_name FROM information_schema.columns WHERE table_schema = 'Tesis'AND table_name   = '${cab}';`;
+            query = client.query(select);
+            query.on('row', (row) => {
+                
+                encabezados.push(row)
+                
+            });
+            query.on('end', () => {
+                done();
+               
+                title.push(req.body.grafica)
+                console.log("se cerro base de datos")
+                var contenido=[{
+                    grafica: results,
+                    title:title,
+                    encabezados:encabezados,
+                    subtitle: 'Periodo : '+anio
+                }]
+				return res.json(contenido);
+            });
+        });
+    }
 }

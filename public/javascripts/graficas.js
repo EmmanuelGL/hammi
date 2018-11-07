@@ -19,7 +19,7 @@ app.controller('graficas', function($scope, $http,$timeout) {
 	];
 	$scope.limit = (new Date()).getFullYear()
 	$scope.selectgraficas = function(){
-		
+		$scope.subtitle='';
 			$scope.grafica={
 				grafica : $scope.selectActas
 			}
@@ -50,7 +50,7 @@ app.controller('graficas', function($scope, $http,$timeout) {
 		$scope.grafica={
 			grafica : $scope.selectTesis
 		}
-		
+		$scope.subtitle= '';
 		var pathname = window.location.pathname;
 		$http.post(pathname, $scope.grafica)
 		.then(function onSuccess(response) {
@@ -82,25 +82,56 @@ app.controller('graficas', function($scope, $http,$timeout) {
 		}
 		$http.post('/periodo', $scope.grafica)
 		.then(function onSuccess(response) {
-			console.log(JSON.stringify(response.data));
-			// $scope.grafica1 = response.data[0].grafica;
-			// $scope.title = response.data[0].title[0]
-			// $scope.encabezados = response.data[0].encabezados;
+			// console.log(JSON.stringify(response.data));
+			$scope.grafica1 = response.data[0].grafica;
+			$scope.title = response.data[0].title[0];
+			$scope.encabezados = response.data[0].encabezados;
+			$scope.subtitle = response.data[0].subtitle;
 			// $scope.tiempo = response.status;
 		}, function onError(response) {
 			var data = response.data;
 			console.log(data);
 		})
-		// $timeout(function callAtTimeout() {
-		// 	if($scope.selectTesis !== "v_deptogradot_final" && $scope.selectTesis!== "v_deptogradot_final"){
-		// 		graficabarra();
-		// 		graficapastel();
-		// 	}
-		// 	if($scope.selectTesis == "v_deptogradot_final" || $scope.selectTesis== "v_deptogradot_final"){
+		$timeout(function callAtTimeout() {
+			if($scope.selectTesis !== "v_deptogradoa_final" && $scope.selectTesis!== "v_deptogradoa_final"){
+				graficabarra();
+				graficapastel();
+			}
+			if($scope.selectTesis == "v_deptogradoa_final" || $scope.selectTesis== "v_deptogradoa_final"){
 				
-		// 		graficabarra2();
-		// 	}
-		//  }, 500);
+				graficabarra2();
+			}
+		 }, 500);
+
+	}
+	$scope.selectgraficasaniot = function(x){
+		// console.log(x+'  prueba ----------'+$scope.anio)
+		$scope.grafica={
+			grafica : x,
+			anio : $scope.anio
+		}
+		$http.post('/periodoT', $scope.grafica)
+		.then(function onSuccess(response) {
+			// console.log(JSON.stringify(response.data));
+			$scope.grafica1 = response.data[0].grafica;
+			$scope.title = response.data[0].title[0];
+			$scope.encabezados = response.data[0].encabezados;
+			$scope.subtitle = response.data[0].subtitle;
+			// $scope.tiempo = response.status;
+		}, function onError(response) {
+			var data = response.data;
+			console.log(data);
+		})
+		$timeout(function callAtTimeout() {
+			if($scope.selectTesis !== "v_deptogradot_final" && $scope.selectTesis!== "v_deptogradot_final"){
+				graficabarra();
+				graficapastel();
+			}
+			if($scope.selectTesis == "v_deptogradot_final" || $scope.selectTesis== "v_deptogradot_final"){
+				
+				graficabarra2();
+			}
+		 }, 500);
 
 	}
 	function graficabarra(){
@@ -115,6 +146,9 @@ app.controller('graficas', function($scope, $http,$timeout) {
 			},
 			title: {
 				text: $scope.title
+			},
+			subtitle: {
+				text: $scope.subtitle
 			},
 			xAxis: {
 				type: 'category',
@@ -168,6 +202,9 @@ app.controller('graficas', function($scope, $http,$timeout) {
 					 title: {
 						 text: $scope.title
 					 },
+					 subtitle: {
+						text: $scope.subtitle
+					},
 					 tooltip: {
 						 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 					 },
@@ -203,6 +240,9 @@ app.controller('graficas', function($scope, $http,$timeout) {
 			},
 			title: {
 				text: $scope.title
+			},
+			subtitle: {
+				text: $scope.subtitle
 			},
 			xAxis: {
 				type: 'category',

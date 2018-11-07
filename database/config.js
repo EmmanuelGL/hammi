@@ -11,7 +11,7 @@
   const config = {
 		user: 'postgres',
 		host: '127.0.0.1',
-		database: 'tesis',
+		database: 'Tesisultima',
 		password: 'root',
 		port: 5432,
 		}
