@@ -166,3 +166,17 @@
 .pager .previous>a,.pager .previous>span{float:left}
 .pager .disabled>a,.pager .disabled>a:hover,
 .pager .disabled>a:focus,.pager .disabled>span{color:#999;cursor:default;background-color:#fff}
+
+
+
+.highlight{
+    background: blue;
+}
+#autocomplete {
+    /* color: #222;  */
+    z-index: 100; 
+    position:absolute;
+    width: 92%;
+    background-color: #222
+
+}

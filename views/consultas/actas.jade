@@ -1,158 +1,9 @@
-//- extends ../templates/default
-//- block content
-//-     script(src='http://c.fzilla.com/1286136086-jquery.js')
-//-     //- script(src='http://c.fzilla.com/1291523190-jpaginate.js')
-//-     link(rel='stylesheet', href='/stylesheets/query.css')
-//-     script(src='/vendor/pagination/jpaginate.js')
-//-     link(rel='stylesheet', href='/stylesheets/query.css') 
-        
-//-     script.
-//-             $(document).ready(function(){
-//-             $("#content").jPaginate();
-//-             });
-    
-//-   div.ingreso(style='margin-top:50px')
-//-       div.panel
-//-         div.box-body(style='min-height: 700px; ')
-//-           div.jumbotron(style='background: white' )
-//-             div.container(ng-controller='ExampleController')
-//-                 div.row.menu
-//-                     div.col-md-3
-//-                         div.well.well-sm
-//-                             form.form-horizontal(action='/consultas/actas', method='post')
-//-                                 a.text-center Ordenar
-//-                                 div
-//-                                     select.form-control.text-all(name='Busqueda',onChange="this.form.submit()")
-//-                                         option='Elige una opción'
-//-                                         option='Alumno'  
-//-                                         option='Título'
-//-                                         option='Folio'
-//-                                         option='Lugar'
-//-                                         option='Fecha de toma de grado'
-//-                                         option='Directores'
-//-                                         option='Sinodales'
-//-                     div.col-md-1
-//-                         button.icono(onclick=" location.href='/consultas/actas' ") 
-//-                             i.glyphicon.glyphicon-home
-//-                             span Datos                    
-//-                     div.container.col-md-7(style='padding-top: 15px;')
-//-                         div.pull-right
-//-                             button.btn.btn-info.btn-lg.text-all(type='button', data-toggle='modal', data-target='#myModal') CONSULTA AVANZADA
-//-                         // Modal
-//-                         div#myModal.modal.fade(role='dialog')
-//-                             form(action='/consultas/actas' method='post' autocomplete='off')
-//-                                 div.modal-dialog
-//-                                     div.modal-content.text-all
-//-                                         div.modal-header
-//-                                             button.close(type='button', data-dismiss='modal') ×
-//-                                             h4.modal-title Búsqueda avanzada de actas
-//-                                         div.modal-body
-                                            
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         input(name='modal' style="display:none" value="desorden")
-//-                                                         input(type='text' name='folio' placeholder='Folio' class='form-control')
-//-                                                     div.col-xs-6
-//-                                                         input(type='text' name='lugar' placeholder='Lugar' class='form-control')
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         h4 Desde
-//-                                                         div.input-group
-//-                                                             span.input-group-addon
-//-                                                                 i.glyphicon.glyphicon-calendar
-//-                                                             input.form-control(type="Date" name="desde" min="1960-01" value="1960-01-01")
-//-                                                     div.col-xs-6
-//-                                                         h4 Hasta
-//-                                                         div.input-group
-//-                                                             span.input-group-addon
-//-                                                                 i.glyphicon.glyphicon-calendar
-//-                                                             input.form-control(type="Date" name="hasta" min="1960-01" value="2020-01-01")
-//-                                                 br
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         input(type='text' name='alumno' placeholder='Alumno' class='form-control')
-//-                                                 br
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         input(type='text' name='titulo' placeholder='Título' class='form-control')
-//-                                                 br
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         input(type='text' name='director' placeholder='Director' class='form-control')
-//-                                                 br
-//-                                                 div.row
-//-                                                     div.col-xs-6
-//-                                                         input(type='text' name='sinodal' placeholder='Sinodal' class='form-control')
-    
-//-                                         div.modal-footer
-//-                                             div.pull-left
-//-                                                 button.btn.btn-danger(type='button', data-dismiss='modal') Cancelar
-//-                                             div.pull-right
-//-                                                 button.btn.btn-primary(type="submit" class='btn btn-default')
-//-                                                     i.fa.fa-spinner.fa-pulse.fa-lg.fa-fw(ng-show='isProcess')
-//-                                                         //- span(ng-show='!isProcess') Buscar
-//-                                                     span Buscar
-                                                
-//-                 -if(items==0) 
-//-                     div(class="alert alert-warning alert-dismissable")
-//-                         button(type="button" class="close" data-dismiss="alert") &times;
-//-                         strong ¡Atención!
-//-                             | No se encontró nada en su búsqueda.
-//-                 p   
-//-                 div#content.text-all
-//-                     -if(items)
-//-                         -for item in items
-//-                             div.thumbnail
-//-                                 table.table.table-striped.table-bordered        
-                                
-//-                                     thead
-//-                                         td(colspan="2") 
-//-                                             a #{item.título}
-//-                                     tbody    
-//-                                         tr
-//-                                             td 
-//-                                                 b Alumno:
-//-                                             td
-//-                                                 ul #{item.ALUMNO} 
-//-                                         tr
-//-                                             td 
-//-                                                 b Folio:
-//-                                             td 
-//-                                                 ul #{item.FOLIO} 
-//-                                         tr
-//-                                             td
-//-                                                 b Lugar:
-//-                                             td 
-//-                                                 ul #{item.LUGAR}
-//-                                         tr
-//-                                             td
-//-                                                 b Fecha de Toma de Grado:
-//-                                             td 
-//-                                                 ul #{item["FECHA DE TOMA DE GRADO"]}
-//-                                         tr
-//-                                             td 
-//-                                                 b Directores:
-//-                                             td  
-//-                                                 ul(style="list-style-type:none")
-//-                                                     li #{item.DIRECTOR} 
-//-                                                     li #{item.DIRECTOR1}
-//-                                                     li #{item.DIRECTOR2} 
-//-                                                     li #{item.DIRECTOR3}
-//-                                                     li #{item.DIRECTOR4}                                          
-//-                                         tr
-//-                                             td
-//-                                                 b Sinodales:
-//-                                             td 
-//-                                                 ul(style='list-style-type:none')
-//-                                                     li #{item.SINODAL}
-//-                                                     li #{item.SINODAL1}
-//-                                                     li #{item.SINODAL2}
-//-                                                     li #{item.SINODAL3}
-//-                                                     li #{item.SINODAL4}
-                            
 extends ../templates/default
 block content   
+    //- script(src="/javascripts/queryPage.js")
     script(src="/javascripts/queryPage.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js")
+    script(src='/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js')
     link(rel='stylesheet', href='/stylesheets/query.css')
     div.ingreso(style='margin-top:50px')
         div.panel(ng-app="consultas", ng-cloak)
@@ -161,19 +12,14 @@ block content
                     div.container
                         div.row.menu
                             div.col-md-3
+                                p {{folio}}
                                 div.well.well-sm
-                                    form.form-horizontal(action='/consultas/actas', method='post')
+                                    form.form-horizontal
                                         a.text-center Ordenar
                                         div
-                                            select.form-control.text-all(name='Busqueda',onChange="this.form.submit()")
-                                                option='Elige una opción'
-                                                option='Alumno'  
-                                                option='Título'
-                                                option='Folio'
-                                                option='Lugar'
-                                                option='Fecha de toma de grado'
-                                                option='Directores'
-                                                option='Sinodales'
+                                            select.form-control(id='ordenar', name='ordenar',ng-model="ordenar", ng-change="orderactas()")
+                                                option(value='', disabled)='Elige una opción'
+                                                option(ng-repeat="x in tipo1" value="{{x.value}}"){{x.select}}
                             div.col-md-1
                                 button.icono(onclick=" location.href='/consultas/actas' ") 
                                     i.glyphicon.glyphicon-home
@@ -181,141 +27,69 @@ block content
                             div.container.col-md-7(style='padding-top: 15px;')
                                 div.pull-right
                                     button.btn.btn-info.btn-lg.text-all(type='button', data-toggle='modal', data-target='#myModal') CONSULTA AVANZADA
-                                // Modal
-                                div#myModal.modal.fade(role='dialog')
-                                    form(action='/consultas/actas' method='post' autocomplete='off')
-                                        div.modal-dialog
-                                            div.modal-content.text-all
-                                                div.modal-header
-                                                    button.close(type='button', data-dismiss='modal') ×
-                                                    h4.modal-title Búsqueda avanzada de actas
-                                                div.modal-body
-                                                    
-                                                        div.row
-                                                            div.col-xs-6
-                                                                input(name='modal' style="display:none" value="desorden")
-                                                                input(type='text' name='folio' placeholder='Folio' class='form-control')
-                                                            div.col-xs-6
-                                                                input(type='text' name='lugar' placeholder='Lugar' class='form-control')
-                                                        div.row
-                                                            div.col-xs-6
-                                                                h4 Desde
-                                                                div.input-group
-                                                                    span.input-group-addon
-                                                                        i.glyphicon.glyphicon-calendar
-                                                                    input.form-control(type="Date" name="desde" min="1960-01" value="1960-01-01")
-                                                            div.col-xs-6
-                                                                h4 Hasta
-                                                                div.input-group
-                                                                    span.input-group-addon
-                                                                        i.glyphicon.glyphicon-calendar
-                                                                    input.form-control(type="Date" name="hasta" min="1960-01" value="2020-01-01")
-                                                        br
-                                                        div.row
-                                                            div.col-xs-6
-                                                                input(type='text' name='alumno' placeholder='Alumno' class='form-control')
-                                                        br
-                                                        div.row
-                                                            div.col-xs-6
-                                                                input(type='text' name='titulo' placeholder='Título' class='form-control')
-                                                        br
-                                                        div.row
-                                                            div.col-xs-6
-                                                                input(type='text' name='director' placeholder='Director' class='form-control')
-                                                        br
-                                                        div.row
-                                                            div.col-xs-6
-                                                                input(type='text' name='sinodal' placeholder='Sinodal' class='form-control')
-            
-                                                div.modal-footer
-                                                    div.pull-left
-                                                        button.btn.btn-danger(type='button', data-dismiss='modal') Cancelar
-                                                    div.pull-right
-                                                        button.btn.btn-primary(type="submit" class='btn btn-default')
-                                                            i.fa.fa-spinner.fa-pulse.fa-lg.fa-fw(ng-show='isProcess')
-                                                                //- span(ng-show='!isProcess') Buscar
-                                                            span Buscar
-                                                    
-                        -if(items==0) 
-                            div(class="alert alert-warning alert-dismissable")
-                                button(type="button" class="close" data-dismiss="alert") &times;
-                                strong ¡Atención!
-                                    | No se encontró nada en su búsqueda.
-                        p   
-                        div#content.text-all
-                            
-                                    div.thumbnail(ng-repeat='item in items')
-                                        table.table.table-striped.table-bordered        
-                                        
-                                            thead
-                                                td(colspan="2") 
-                                                    a {{item.titulo}}
-                                            tbody    
-                                                tr
-                                                    td 
-                                                        b Alumno:
-                                                    td
-                                                        ul {{item.alumno}} 
-                                                tr
-                                                    td 
-                                                        b Folio:
-                                                    td 
-                                                        ul {{item.folio}} 
-                                                tr
-                                                    td
-                                                        b Lugar:
-                                                    td 
-                                                        ul {{item.lugar}}
-                                                tr
-                                                    td
-                                                        b Fecha de Toma de Grado:
-                                                    td 
-                                                        ul {{item.fecha | date:'dd-MM-yyyy'}}
-                                                tr
-                                                    td 
-                                                        b Director:
-                                                    td  
-                                                        ul(style="list-style-type:none")
-                                                            li {{item.director}}       
-                                                tr
-                                                    td 
-                                                        b Codirectores:
-                                                    td  
-                                                        ul(style="list-style-type:none")
-                                                            li {{item.codirector1}} 
-                                                            li {{item.codirector2}}
-                                                            li {{item.codirector3}}
-                                                            li {{item.codirector4}}
-                                                tr
-                                                    td
-                                                        b Sinodales:
-                                                    td 
-                                                        ul(style='list-style-type:none')
-                                                            li {{item.sinodal1}}
-                                                            li {{item.sinodal2}}
-                                                            li {{item.sinodal3}}
-                                                            li {{item.sinodal4}}
-                                                            li {{item.sinodal5}}
-                                                            
-                                    
+                                    include modalA
+                        div(class="alert alert-warning alert-dismissable" ng-show="vacio == true")
+                            button(type="button" class="close" data-dismiss="alert") &times;
+                            strong ¡Atención!
+                                | No se encontró nada en su búsqueda.
+                        div(ng-if='vacio == false')
+                            center
+                                div.loader(ng-show="items.length == 0") 
+                        div(ng-show="items.length > 0 ")                      
+                            p 
+                            h5 Total de Actas: {{items.length}} 
+                            div#content.text-all
                                 
-                        
-                                                        
-                                                                
-                            
-                                
-                
-                
-    
-                                        
-                                                                 
-                   
-                                                
-                                                                
-                            
-                                
-                
-                
-    
-                                        
+                                        div.thumbnail(ng-repeat="items in filteredTodos" ng-init='p()')
+                                            table.table.table-striped.table-bordered        
                                             
+                                                thead
+                                                    td(colspan="2") 
+                                                        a {{items.titulo}}
+                                                tbody    
+                                                    tr
+                                                        td 
+                                                            b Alumno:
+                                                        td
+                                                            ul {{items.alumno}} 
+                                                    tr
+                                                        td 
+                                                            b Folio:
+                                                        td 
+                                                            ul {{items.folio}} 
+                                                    tr
+                                                        td
+                                                            b Lugar:
+                                                        td 
+                                                            ul {{items.lugar}}
+                                                    tr
+                                                        td
+                                                            b Fecha de Toma de Grado:
+                                                        td 
+                                                            ul {{items.fecha | date:'dd-MM-yyyy'}}
+                                                    tr
+                                                        td 
+                                                            b Director:
+                                                        td  
+                                                            ul(style="list-style-type:none")
+                                                                li {{items.director}}       
+                                                    tr
+                                                        td 
+                                                            b Codirectores:
+                                                        td  
+                                                            ul(style="list-style-type:none")
+                                                                li {{items.codirector1}} 
+                                                                li {{items.codirector2}}
+                                                                li {{items.codirector3}}
+                                                                li {{items.codirector4}}
+                                                    tr
+                                                        td
+                                                            b Sinodales:
+                                                        td 
+                                                            ul(style='list-style-type:none')
+                                                                li {{items.sinodal1}}
+                                                                li {{items.sinodal2}}
+                                                                li {{items.sinodal3}}
+                                                                li {{items.sinodal4}}
+                                                                li {{items.sinodal5}}
+                            .container(data-pagination='', data-num-pages='numPages()', data-current-page='currentPage', data-max-size='maxSize', data-boundary-links='true')

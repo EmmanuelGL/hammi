@@ -34,7 +34,7 @@ block content
                         tr
                             th(ng-repeat='x in encabezados'){{x.column_name | uppercase}}                       
                     tbody
-                        tr(ng-repeat="elem in grafica1")
+                        tr(ng-repeat="elem in grafica1" ng-init='callAtTimeout()')
                             td(ng-repeat="z in elem"){{z}}
               
 

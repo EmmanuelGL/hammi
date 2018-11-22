@@ -12,6 +12,9 @@
 .error{
     color:#FF0000;
 }
+form .ng-invalid.ng-touched {
+    border: 1px solid #FF4136;
+  }
 .may{
     
         text-transform: uppercase;

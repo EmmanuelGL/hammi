@@ -8,7 +8,7 @@ block content
     div.box-body(style='min-height: 10px; ')
       div.jumbotron(style='background: white')
         div.row(style='margin-left: auto; margin-right: auto;')
-          div.panel(ng-controller='data')
+          div.panel(ng-controller='data',ng-init='consulta()')
             
             form(name="form" autocomplete="off")
               //- inserta datos de alumno
@@ -19,14 +19,14 @@ block content
                     div.col-xs-10
                       div.col-xs-9
                         label(for="matricula")= 'Matricula'
-                        input(type='text' name='matricula' id='matricula' placeholder='Matricula' class='form-control' ng-model="user.matricula"  required='')
+                        input(type='number' name='matricula' id='matricula' placeholder='Matricula' class='form-control' ng-model="user.matricula"  ng-required="true")
                       div.col-xs-12(ng-show='form.$submitted || form.matricula.$touched')
-                        div.warning(ng-show='form.matricula.$error.required') Introducir una Matricula.
+                        div.error(ng-show='form.matricula.$error.required') Introducir una Matricula.
                     div.col-xs-12
                       div.col-xs-3(id="input1" class="clonedInput")
                         label(for="nombre")= 'Nombre'
                         //- |Nombre:
-                        input(type='text' name="name" id="name" placeholder='nombre' class='form-control' ng-model="user.nombre"  required='') 
+                        input(type='text' name="name" id="name" placeholder='nombre' class='form-control' ng-model="user.nombre"  ng-required="true") 
                       div.col-xs-3(id="input2" class="clonedInput" style='display:none;')
                         label(for="nombre2")= 'Nombre 2'
                         //- |Nombre2:
@@ -45,7 +45,7 @@ block content
                             button#btnDel(type='button', class="btn btn-danger")
                               span.glyphicon.glyphicon-minus
                       div.col-xs-12(ng-show='form.$submitted || form.name.$touched')
-                        div.warning(ng-show='form.name.$error.required') Introducir un Nombre.
+                        div.error(ng-show='form.name.$error.required') Introducir un Nombre.
                     div.col-xs-12
                       div.col-xs-3(id="inputA1" class="clonedInputA")
                         label(for="nombre")= 'Apellido'
@@ -69,7 +69,7 @@ block content
                             button#btnDel1(type='button', class="btn btn-danger")
                               span.glyphicon.glyphicon-minus
                       div.col-xs-12(ng-show='form.$submitted || form.apellido.$touched')
-                        div.warning(ng-show='form.apellido.$error.required') Introducir un Apellido.
+                        div.error(ng-show='form.apellido.$error.required') Introducir un Apellido.
                     
               //-visualización de alumno 
               div.container(class='col-md-4')
@@ -90,32 +90,21 @@ block content
                       label(for="tt")= 'Titulo de tesis'
                       input(type='text' name='tituloT' placeholder='Titulo de tesis' class='form-control' ng-model="user.tituloT" required='')
                       div(ng-show='form.$submitted || form.tituloT.$touched')
-                        span.warning(ng-show='form.tituloT.$error.required') Introducir el Titulo de Tesis.
+                        span.error(ng-show='form.tituloT.$error.required') Introducir el Titulo de Tesis.
                     div.col-xs-5
                       label(for="mes")= 'Mes'
                       select.form-control(name='mes'  ng-model="user.mes" required='')
                         option(value='' disabled) Selecciona Mes
-                        option(value=1)='Enero'
-                        option(value=2)='Febrero'  
-                        option(value=3)='Marzo'
-                        option(value=4)='Abril'
-                        option(value=5)='Mayo'
-                        option(value=6)='Junio'
-                        option(value=7)='Julio'
-                        option(value=8)='Agosto'
-                        option(value=9)='Septiembre'
-                        option(value=10)='Octubre'
-                        option(value=11)='Noviembre'
-                        option(value=12)='Diciembre'
+                        option(ng-repeat="x in meses" value="{{x.numero}}"){{x.nombre}}
                       div(ng-show='form.$submitted || form.mes.$touched')
-                          span.warning(ng-show='form.mes.$error.required') Introducir el Mes.
+                          span.error(ng-show='form.mes.$error.required') Introducir el Mes.
                     div.col-xs-5
                       label(for="ano")= 'Año'
-                      input#anio(type="number"  name="anio" min="1960" max=""  class='form-control' ng-model="user.ano" required='' )
+                      input#anio(type="number"  name="anio" min="1960" max="{{n}}"  class='form-control' ng-model="user.ano" required='' )
                       div(ng-show='form.$submitted || form.anio.$touched')
-                        span.warning(ng-show='form.anio.$error.required') Introducir el año de la Tesis.
-                        span.warning(ng-show='form.anio.$error.number') ¡El valor no es un Numero!
-                        span.warning(ng-show='form.anio.$error.min || form.anio.$error.max') ¡El valor debe estar en el rango de 1960 al año actual!
+                        span.error(ng-show='form.anio.$error.required') Introducir el año de la Tesis.
+                        span.error(ng-show='form.anio.$error.number') ¡El valor no es un Numero!
+                        span.error(ng-show='form.anio.$error.min || form.anio.$error.max') ¡El valor debe estar en el rango de 1960 al año {{n}}!
                                   
               //-visualización de tesis
               div.container(class='col-md-4')
@@ -125,7 +114,7 @@ block content
                     a Titulo de Tesis:
                     p(ng-bind="user.tituloT")
                     a Mes:
-                    p(ng-bind="user.mes")
+                    p{{meses[user.mes-1].nombre}}
                     a Año:
                     p(ng-bind="user.ano")
 
@@ -137,26 +126,31 @@ block content
                     div.col-xs-12 
                       div.col-xs-6
                         label(for="folio")= 'Folio'
-                        input(type='text' name='folio' id='folio' placeholder='Folio' class='form-control' ng-model="user.folio" required='')
+                        input(type='number' name='folio' id='folio' placeholder='Folio' class='form-control' ng-model="user.folio" required='')
                         div(ng-show='form.$submitted || form.folio.$touched')
-                          span.warning(ng-show='form.folio.$error.required') Introducir el Folio.
+                          span.error(ng-show='form.folio.$error.required') Introducir el Folio.
                       div.col-xs-6
                         label(for="lugar")= 'Lugar'
                         select.form-control(name='lugar'  ng-model="user.lugar" required='')
                           option(value='' disabled) Selecciona Lugar
-                          -for item2 in items2
-                            option(value=item2.idunidad) #{item2.idunidad}-#{item2.nombre}
+                          option(ng-repeat="x in items2" value="{{x.idunidad}}"){{x.nombre}}
+                        //- select.form-control(name='lugar'  ng-model="user.lugar" required='')
+                        //-   option(value='' disabled) Selecciona Lugar
+                        //-   -for item2 in items2
+                        //-     option(value=item2.idunidad) #{item2.idunidad}-#{item2.nombre}
                         div(ng-show='form.$submitted || form.lugar.$touched')
-                          span.warning(ng-show='form.lugar.$error.required') Introducir el Lugar.
+                          span.error(ng-show='form.lugar.$error.required') Introducir el Lugar.
                     div.col-xs-12
                       div.col-xs-6
                         label(for="grado")= 'Grado'
                         select.form-control(name='grado'  ng-model="user.grado" required='')
                           option(value='' disabled) Selecciona Grado
-                          -for item in items
-                            option(value=item.idgrado) #{item.idgrado}-#{item.grado}
+                          option(ng-repeat="x in items" ng-if='x.idgrado== 1 || x.idgrado==2' value="{{x.idgrado}}"){{x.grado}}
+                        //-   option(value='' disabled) Selecciona Grado
+                        //-   -for item in items
+                        //-     option(value=item.idgrado) #{item.idgrado}-#{item.grado}
                         div(ng-show='form.$submitted || form.grado.$touched')
-                          span.warning(ng-show='form.grado.$error.required') Introducir el Grado.
+                          span.error(ng-show='form.grado.$error.required') Introducir el Grado.
                                 
               //-visualización de actas
               div.container(class='col-md-4')
@@ -166,9 +160,10 @@ block content
                     a Folio:
                     p(ng-bind="user.folio")
                     a Lugar:
-                    p(ng-bind="user.lugar")
+                    p
+                    p(ng-repeat="x in items2" ng-if='x.idunidad == user.lugar'){{x.nombre}}
                     a Grado:
-                    p(ng-bind="user.grado")
+                    p(ng-repeat="x in items" ng-if='x.idgrado == user.grado'){{x.grado}}
               
               //-insertar Director y Codirectores
               div.container(class='col-md-12')
@@ -181,13 +176,17 @@ block content
                           div.panel-body 
                             div.col-xs6
                               label(for="grado")= 'Director'
-                              select.form-control(name='director'  ng-model="user.director" required='')
-                                option(value='' disabled) Selecciona Director
-                                -for item3 in items3
-                                  option(value=item3.idpersona) #{item3.nombre} #{item3.nombre2} #{item3.nombre3} #{item3.apellido} #{item3.apellido2} #{item3.apellido3}
+                              select.form-control(name='director', ng-model='user.director', ng-options='x as x.nombre  for x in items3'  required='')
+                                 option(value='' disabled) Selecciona Director
+                              //- select.form-control(name='director'  ng-model="user.director" required='')
+                              //-   option(value='' disabled) Selecciona Director
+                              //-   option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
+                              //-   option(value='' disabled) Selecciona Director
+                              //-   -for item3 in items3
+                              //-     option(value=item3.idpersona) #{item3.nombre} #{item3.nombre2} #{item3.nombre3} #{item3.apellido} #{item3.apellido2} #{item3.apellido3}
                               
                               div(ng-show='form.$submitted || form.director.$touched')
-                                span.warning(ng-show='form.director.$error.required') Introducir al Director.
+                                span.error(ng-show='form.director.$error.required') Introducir al Director.
                       
                       //-inserta codirectores
                       div.container(class='col-md-4')
@@ -195,75 +194,33 @@ block content
                           div.panel-heading Co Directores
                           div.panel-body
                             label(for="grado")= 'Co Directores'
-                            select.form-control.text-all(name='codirector'  ng-model="user.codirector")
-                                      option(value='') Sin codirector
-                                      option(value='1')='Máximo López López'  
-                                      option='Agustín Conde Gallardo'
-                                      option='Eloy Ayón Beato'
-                                      option='Ricardo López Fernández'
-                                      option='Pablo Roig Garcés'
-                                      option='Rafael Baquero Parra'
-                                      option='David Bermúdez Rosales'
-                                      option='Mauricio Carbajal Tinoco'
-                                      option='Heriberto Castilla Valdez'
-                                      option='Jorge Javier Castro Hernández'
-                                      option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='codirector'  ng-model="user.codirector"  ng-options='x as x.nombre disable when x == user.director  for x in items3' ng-disabled="!user.director")
+                                option(value='' disabled) Selecciona Codirector
                             br
-                            select.form-control.text-all(name='codirector1'  ng-model="user.codirector1" )
-                                      option(value='') Sin codirector 1
-                                      option='Máximo López López'  
-                                      option='Agustín Conde Gallardo'
-                                      option='Eloy Ayón Beato'
-                                      option='Ricardo López Fernández'
-                                      option='Pablo Roig Garcés'
-                                      option='Rafael Baquero Parra'
-                                      option='David Bermúdez Rosales'
-                                      option='Mauricio Carbajal Tinoco'
-                                      option='Heriberto Castilla Valdez'
-                                      option='Jorge Javier Castro Hernández'
-                                      option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='codirector1'  ng-model="user.codirector1"  ng-options='x as x.nombre disable when x == user.director || x == user.codirector for x in items3' ng-disabled="!user.director || !user.codirector")
+                                option(value='' disabled) Selecciona Codirector1
                             br
-                            select.form-control.text-all(name='codirector2'  ng-model="user.codirector2" )
-                                      option(value='') Sin codirector 2
-                                      option='Máximo López López'  
-                                      option='Agustín Conde Gallardo'
-                                      option='Eloy Ayón Beato'
-                                      option='Ricardo López Fernández'
-                                      option='Pablo Roig Garcés'
-                                      option='Rafael Baquero Parra'
-                                      option='David Bermúdez Rosales'
-                                      option='Mauricio Carbajal Tinoco'
-                                      option='Heriberto Castilla Valdez'
-                                      option='Jorge Javier Castro Hernández'
-                                      option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='codirector2'  ng-model="user.codirector2"  ng-options='x as x.nombre disable when x == user.director || x == user.codirector || x == user.codirector1 for x in items3' ng-disabled="!user.director || !user.codirector || !user.codirector1")
+                                option(value='' disabled) Selecciona Codirector2
                             br
-                            select.form-control.text-all(name='codirector3'  ng-model="user.codirector3" )
-                                      option(value='') Sin codirector 3
-                                      option='Máximo López López'  
-                                      option='Agustín Conde Gallardo'
-                                      option='Eloy Ayón Beato'
-                                      option='Ricardo López Fernández'
-                                      option='Pablo Roig Garcés'
-                                      option='Rafael Baquero Parra'
-                                      option='David Bermúdez Rosales'
-                                      option='Mauricio Carbajal Tinoco'
-                                      option='Heriberto Castilla Valdez'
-                                      option='Jorge Javier Castro Hernández'
-                                      option='J. Javier Cobos Martínez'
-                                    
+                            select.form-control.text-all(name='codirector3'  ng-model="user.codirector3"  ng-options='x as x.nombre  disable when x == user.director || x == user.codirector || x == user.codirector1 || x == user.codirector2 for x in items3' ng-disabled="!user.director || !user.codirector || !user.codirector1 || !user.codirector2")
+                                option(value='' disabled) Selecciona Codirector3
+                                   
                       //-vista de directores y codirectores
                       div.container(class='col-md-4')
                         div.panel.panel-default
-                          div.panel-heading Vista Directores y Co Directores
+                          div.panel-heading Vista Director y Co Directores
                           div.panel-body 
                             a Director:
-                            p(ng-bind="user.director")
+                            p(ng-bind="user.director.nombre")
+                            //- br
+                            //- p(ng-repeat="x in items3" ng-if='x.idpersona == user.director'){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
                             a Co Directores
-                            p(ng-bind="user.codirector")
-                            p(ng-bind="user.codirector1")
-                            p(ng-bind="user.codirector2")
-                            p(ng-bind="user.codirector3")
-                            //- p {{codirector4}}
+                            p(ng-bind="user.codirector.nombre")
+                            p(ng-bind="user.codirector1.nombre")
+                            p(ng-bind="user.codirector2.nombre") 
+                            p(ng-bind="user.codirector3.nombre")  
+                            
               
               //-insertar sinodales 
               div.container(class='col-md-12')
@@ -275,86 +232,37 @@ block content
                           div.panel-heading Sinodal
                           div.panel-body 
                             label(for="grado")= 'Sinodales'
-                            select.form-control.text-all(name='sinodal'  ng-model="user.sinodal")
-                                    option(value='') Sin Sinodal
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='sinodal'  ng-model="user.sinodal" ng-options='x as x.nombre  for x in items3')
+                              option(value='' disabled) Selecciona Sinodal
+                              //- option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
+                                    
                             br
-                            select.form-control.text-all(name='sinodal2'  ng-model="user.sinodal2")
-                                    option(value='')  Sin Sinodal 2
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='sinodal2'  ng-model="user.sinodal2" ng-options='x as x.nombre  disable when x == user.sinodal for x in items3'  ng-disabled="!user.sinodal")
+                              option(value='' disabled) Selecciona Sinodal2
+                              //- option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
                             br
-                            select.form-control.text-all(name='sinodal3'  ng-model="user.sinodal3")
-                                    option(value='')  Sin Sinodal 3
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='sinodal3'  ng-model="user.sinodal3" ng-options='x as x.nombre disable when x == user.sinodal || x == user.sinodal2 for x in items3' ng-disabled="!user.sinodal || !user.sinodal2")
+                              option(value='' disabled) Selecciona Sinodal3
+                              //- option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
                             br
-                            select.form-control.text-all(name='sinodal4'  ng-model="user.sinodal4" )
-                                    option(value='') Sin codirector 4
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='sinodal4'  ng-model="user.sinodal4" ng-options='x as x.nombre disable when x == user.sinodal || x == user.sinodal2 || x == user.sinodal3 for x in items3'  ng-disabled="!user.sinodal || !user.sinodal2 || !user.sinodal3")
+                              option(value='' disabled) Selecciona Sinodal4
+                              //- option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
                             br
-                            select.form-control.text-all(name='sinodal5'  ng-model="user.sinodal5")
-                                    option(value='') Sin Sinodal 5
-                                    option='Máximo López López'  
-                                    option='Agustín Conde Gallardo'
-                                    option='Eloy Ayón Beato'
-                                    option='Ricardo López Fernández'
-                                    option='Pablo Roig Garcés'
-                                    option='Rafael Baquero Parra'
-                                    option='David Bermúdez Rosales'
-                                    option='Mauricio Carbajal Tinoco'
-                                    option='Heriberto Castilla Valdez'
-                                    option='Jorge Javier Castro Hernández'
-                                    option='J. Javier Cobos Martínez'
+                            select.form-control.text-all(name='sinodal5'  ng-model="user.sinodal5" ng-options='x as x.nombre disable when x == user.sinodal || x == user.sinodal2 || x == user.sinodal3 || x == user.sinodal4 for x in items3'  ng-disabled="!user.sinodal || !user.sinodal2 || !user.sinodal3 || !user.sinodal4")
+                              option(value='' disabled) Selecciona Sinodal5
+                              //- option(ng-repeat="x in items3" value="{{x.idpersona}}"){{x.nombre}} {{x.nombre2}} {{x.nombre3}} {{x.apellido}} {{x.apellido2}} {{x.apellido3}}
                       //-vista de directores y codirectores
                       div.container(class='col-md-5')
                         div.panel.panel-default
                           div.panel-heading Vista Sinodal
                           div.panel-body 
                             a Sinodales:
-                            p(ng-bind="user.sinodal")
-                            p(ng-bind="user.sinodal2")
-                            p(ng-bind="user.sinodal3")
-                            p(ng-bind="user.sinodal4")
-                            p(ng-bind="user.sinodal5")
+                            p(ng-bind="user.sinodal.nombre")
+                            p(ng-bind="user.sinodal2.nombre")
+                            p(ng-bind="user.sinodal3.nombre")
+                            p(ng-bind="user.sinodal4.nombre")
+                            p(ng-bind="user.sinodal5.nombre")
              
               //-inserta sinodales invitados
               div.container(class='col-md-8')
@@ -441,20 +349,8 @@ block content
                 div.container
                   #JSON
                   //- button(type='submit', ng-click='update(user)') Guardar
-                  button.pull-right(type='submit', class="btn btn-primary", ng-click='insertar(user)') Insertar Datos  
-              //- label
-              //- | E-mail:
-              //- input(type='email', ng-model='user.email', name='uEmail', required='')
-              //- br
-              //- div(ng-show='form.$submitted || form.uEmail.$touched')
-              //-   span(ng-show='form.uEmail.$error.required') Tell us your email.
-                      
-              //-   span(ng-show='form.uEmail.$error.email') Este no es un correo electrónico válido.    Introducir el Folio.
-                div
-                    button(ng-click="reset()") Reset
-                    
-                pre user = {{user | json}}
-                pre master = {{master | json}}
+                  button.pull-right(type='submit', class="btn btn-primary", ng-click='insertar(user)' ng-disabled="form.$invalid") Insertar Datos  
+              
   script(type='text/javascript', src='/javascripts/infoInputs.js' )           
   script(type='text/javascript', src='/javascripts/inputs.js')         
   script(type='text/javascript', src='/vendor/bootstrap-sweetalert/dist/sweetalert.min.js')        

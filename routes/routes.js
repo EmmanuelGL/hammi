@@ -45,8 +45,9 @@ router.get('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.getAc
 router.post('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.postActas);
 router.get('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.getTesis);
 router.post('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.postTesis);
-//ajax insert
+//insert
 router.get('/users/registro', AuthMiddleware.isLogged, controllers.Registry.getRegistro);
+router.get('/consulta', AuthMiddleware.isLogged, controllers.Registry.getRegistro1);
 router.post('/users/registro',AuthMiddleware.isLogged, controllers.Registry.postRegistro);
 
 

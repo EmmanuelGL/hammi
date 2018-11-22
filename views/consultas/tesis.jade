@@ -3,7 +3,7 @@ block content
   script(src="/javascripts/queryPage.js")
   script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js")
   script(src='/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js')
-    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/angucomplete-alt/2.4.1/angucomplete-alt.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/angucomplete-alt/2.4.1/angucomplete-alt.min.js")
     //- link(rel="stylesheet" href="/stylesheets/bootstrap.min.css")
   link(rel='stylesheet', href='/stylesheets/query.css') 
   div.ingreso(style='margin-top:50px')
@@ -24,16 +24,17 @@ block content
                         button.icono(onclick=" location.href='/consultas/tesis' ") 
                             i.glyphicon.glyphicon-home
                             span Datos   
-                    div.container.col-md-7(style='padding-top: 5px;')
+                    div.container.col-md-7(style='padding-top: 15px;')
                         div.pull-right
                             button.btn.btn-info.btn-lg.text-all(type='button', data-toggle='modal', data-target='#myModal') CONSULTA AVANZADA
                             include modalT
-                div(class="alert alert-warning alert-dismissable" ng-show="items.length == undefined")
+                div(class="alert alert-warning alert-dismissable" ng-show="vacio == true")
                     button(type="button" class="close" data-dismiss="alert") &times;
                     strong ¡Atención!
                     | No se encontró nada en su búsqueda.
-                center
-                    div.loader(ng-show="items.length == 0")
+                div(ng-if='vacio == false')
+                    center
+                        div.loader(ng-show="items.length == 0")
                 div(ng-show="items.length > 0 ")                      
                     p 
                     h5 Total de Tesis: {{items.length}}
