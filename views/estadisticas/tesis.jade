@@ -1,5 +1,6 @@
 extends ../templates/default
 block content
+   script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js')
    script(type='text/javascript', src='/javascripts/graficas.js')
    script(type='text/javascript', src='/javascripts/muestra.js') 
    div.ingreso(style='margin-top:50px'  ng-app="estadisticas" ng-controller="graficas" ng-cloak)

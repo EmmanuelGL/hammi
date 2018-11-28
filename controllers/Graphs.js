@@ -43,6 +43,7 @@ module.exports={
             var query = client.query(select);
             query.on('row', (row) => {
                 results.push(row);
+                console.log(JSON.stringify(row))
             });
             select =`SELECT column_name FROM information_schema.columns WHERE table_schema = 'Tesis'AND table_name   = '${req.body.grafica}';`;
             query = client.query(select);
@@ -113,11 +114,15 @@ module.exports={
         var select='', cab='';
         const results = [];
         title=[],encabezados=[], tipografica = req.body.grafica, anio= req.body.anio;
-        // console.log(req.body.grafica+'-----jajajajajaya we--------'+req.body.anio)
+        console.log(req.body.grafica+'-----jajajajajaya we--------'+req.body.anio)
         //--------------------Actas-------------------------
         if(tipografica == 'Departamento'){
             select= `select * from "Tesis".deptoA('${anio}-01-01','${anio}-12-31')`;
             cab = "v_departamentoa"; 
+        }
+        if(tipografica == 'Especialidad'){
+            select =`select * from "Tesis".espea('${anio}-01-01','${anio}-12-31')`;
+            cab = "v_especialidada"
         }
         if(tipografica == 'Grado'){
             select=`select * from "Tesis".gradoA('${anio}-01-01','${anio}-12-31');`
@@ -126,6 +131,10 @@ module.exports={
         if(tipografica == 'Género'){
             select =`select * from "Tesis".generoA('${anio}-01-01','${anio}-12-31');`
             cab = 'v_generoa'
+        }
+        if(tipografica == 'Departamento y Grados'){
+            select = `select * from "Tesis".deptogradoA('${anio}-01-01','${anio}-12-31');`
+            cab = 'v_deptogradoa_final'
         }
        
         pg.connect(connectionString, (err, client, done) => {
@@ -158,6 +167,7 @@ module.exports={
                     encabezados:encabezados,
                     subtitle: 'Periodo : '+anio
                 }]
+                console.log(JSON.stringify(contenido));
 				return res.json(contenido);
             });
         });
@@ -172,6 +182,10 @@ module.exports={
             select= `select * from "Tesis".deptot(${anio})`;
             cab = "v_departamentot"; 
         }
+        if(tipografica == 'Especialidad'){
+            select =`select * from "Tesis".espet(${anio})`;
+            cab = "v_especialidadt"
+        }
         if(tipografica == 'Grado'){
             select=`select * from "Tesis".gradot(${anio});`
             cab = "v_gradot"
@@ -180,7 +194,10 @@ module.exports={
             select =`select * from "Tesis".generot(${anio});`
             cab = 'v_generot'
         }
-       
+        if(tipografica == 'Departamento y Grados'){
+            select = `select * from "Tesis".deptogradot(${anio});`
+            cab = 'v_deptogradot_final' 
+        }
         pg.connect(connectionString, (err, client, done) => {
             if(err) {
                 done();

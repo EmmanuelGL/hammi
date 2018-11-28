@@ -1,5 +1,6 @@
 extends ../templates/default
 block content
+   script(src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js')
    script(type='text/javascript', src='/javascripts/graficas.js')
    script(type='text/javascript', src='/javascripts/muestra.js')        
    div.ingreso(style='margin-top:50px' ng-app="estadisticas" ng-controller="graficas" ng-cloak)
@@ -29,15 +30,24 @@ block content
                                             i.fa.fa-eye
                 h2.text-all(style='text-align:center;') 
                     a {{title}}
-                table#datatable(style='display:none;') 
-                    thead
-                        tr
-                            th(ng-repeat='x in encabezados'){{x.column_name | uppercase}}                       
-                    tbody
-                        tr(ng-repeat="elem in grafica1" ng-init='callAtTimeout()')
-                            td(ng-repeat="z in elem"){{z}}
-              
-
+                div(ng-if="title != 'Especialidad y Departamentos'")
+                    table#datatable(style='display:none;') 
+                        thead
+                            tr
+                                th(ng-repeat='x in encabezados'){{x.column_name | uppercase}}                       
+                        tbody
+                            tr(ng-repeat="elem in grafica1" ng-init='callAtTimeout()')
+                                td(ng-repeat="z in elem"){{z}}
+                div(ng-if="title == 'Especialidad y Departamentos'")
+                    table#datatable(style='display:none;') 
+                        thead
+                            tr
+                                th
+                                th(ng-repeat = "row in grafica1 | unique:'especialidad' | orderBy: 'especialidad'"){{row.especialidad}}                     
+                        tbody
+                            tr(ng-repeat="row1 in grafica1",ng-init='callAtTimeout()')
+                                td{{row1.departamento}}   
+                                td(ng-repeat="row in grafica1 | unique:'especialidad' | orderBy: 'especialidad'"){{row1.especialidad === row.especialidad ? row1.total : 0}}
                 div.nav-tabs-custom(ng-show='title !== "Departamento y Grados" && title !== "Especialidad y Departamentos"')
                     ul.nav.nav-tabs.pull-right
                         li

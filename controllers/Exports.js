@@ -9,7 +9,7 @@ titulos=[{
     v_especialidada : 'Especialidad',
     v_gradoa : 'Grado',
     v_generoa : 'Género',
-    v_deptogradoa : 'Departamento y Grados',
+    v_deptogradoa_final : 'Departamento y Grados',
     v_especialidaddeptoa : 'Especialidad y Departamentos'
 }],
 titulost=[{
@@ -17,8 +17,8 @@ titulost=[{
     v_especialidadt : 'Especialidad',
     v_gradot : 'Grado',
     v_generot : 'Género',
-    v_deptogradot : 'Departamento y Grados',
-    v_especialidaddeptot : 'Especialidad y Departamentos'
+    v_deptogradot_final : 'Departamento y Grados',
+    // v_especialidaddeptot : 'Especialidad y Departamentos'
 }];
 function enviarrowsActas(req,res){
 	res.render('exportar/actas', {

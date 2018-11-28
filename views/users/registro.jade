@@ -22,6 +22,7 @@ block content
                         input(type='number' name='matricula' id='matricula' placeholder='Matricula' class='form-control' ng-model="user.matricula"  ng-required="true")
                       div.col-xs-12(ng-show='form.$submitted || form.matricula.$touched')
                         div.error(ng-show='form.matricula.$error.required') Introducir una Matricula.
+                        span.error(ng-show='form.matricula.$error.number') ¡El valor no es un Numero!
                     div.col-xs-12
                       div.col-xs-3(id="input1" class="clonedInput")
                         label(for="nombre")= 'Nombre'
@@ -129,6 +130,7 @@ block content
                         input(type='number' name='folio' id='folio' placeholder='Folio' class='form-control' ng-model="user.folio" required='')
                         div(ng-show='form.$submitted || form.folio.$touched')
                           span.error(ng-show='form.folio.$error.required') Introducir el Folio.
+                          span.error(ng-show='form.folio.$error.number') ¡El valor no es un Numero!
                       div.col-xs-6
                         label(for="lugar")= 'Lugar'
                         select.form-control(name='lugar'  ng-model="user.lugar" required='')
@@ -347,7 +349,7 @@ block content
                               i.glyphicon.glyphicon-trash
               div.container(class='col-md-12')
                 div.container
-                  #JSON
+                  //-  #JSON
                   //- button(type='submit', ng-click='update(user)') Guardar
                   button.pull-right(type='submit', class="btn btn-primary", ng-click='insertar(user)' ng-disabled="form.$invalid") Insertar Datos  
               
