@@ -87,6 +87,8 @@ module.exports={
             var query = client.query(select);
             query.on('row', (row) => {
                 results.push(row);
+                console.log('----------------prueba-----------------')
+                console.log(JSON.stringify(row))
             });
             select =`SELECT column_name FROM information_schema.columns WHERE table_schema = 'Tesis'AND table_name   = '${req.body.grafica}';`;
             query = client.query(select);
@@ -135,6 +137,10 @@ module.exports={
         if(tipografica == 'Departamento y Grados'){
             select = `select * from "Tesis".deptogradoA('${anio}-01-01','${anio}-12-31');`
             cab = 'v_deptogradoa_final'
+        }
+        if(tipografica == 'Especialidad y Departamentos'){
+            select = `select * from "Tesis".espedeptosa('${anio}-01-01','${anio}-12-31');`
+            cab = 'v_especialidaddeptoa'
         }
        
         pg.connect(connectionString, (err, client, done) => {
@@ -198,6 +204,10 @@ module.exports={
             select = `select * from "Tesis".deptogradot(${anio});`
             cab = 'v_deptogradot_final' 
         }
+        if(tipografica == 'Especialidad y Departamentos'){
+            select = `select * from "Tesis".espedeptost(${anio});`
+            cab = 'v_especialidaddeptot'
+        }
         pg.connect(connectionString, (err, client, done) => {
             if(err) {
                 done();
@@ -219,7 +229,6 @@ module.exports={
             });
             query.on('end', () => {
                 done();
-               
                 title.push(req.body.grafica)
                 console.log("se cerro base de datos")
                 var contenido=[{

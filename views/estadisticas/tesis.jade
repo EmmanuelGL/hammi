@@ -30,14 +30,25 @@ block content
                                             i.fa.fa-eye
                 h2.text-all(style='text-align:center;') 
                     a {{title}}
-                table#datatable(style='display:none;') 
-                    thead
-                        tr
-                            th(ng-repeat='x in encabezados'){{x.column_name | uppercase}} 
-                        
-                    tbody
-                        tr(ng-repeat="elem in grafica1" ng-init='callAtTimeout()')
-                            td(ng-repeat="z in elem"){{z}}
+                div(ng-if="title != 'Especialidad y Departamento'")
+                    table#datatable(style='display:none;') 
+                        thead
+                            tr
+                                th(ng-repeat='x in encabezados'){{x.column_name | uppercase}} 
+                            
+                        tbody
+                            tr(ng-repeat="elem in grafica1" ng-init='callAtTimeout()')
+                                td(ng-repeat="z in elem"){{z}}
+                div(ng-if="title == 'Especialidad y Departamentos'")
+                    table#datatable() 
+                        thead
+                            tr
+                                th especialidad
+                                th(ng-repeat = "row in grafica1 | orderBy: 'especialidad'"){{row.departamento}}                     
+                        tbody
+                            tr( ng-repeat="row1 in grafica1 | unique:'especialidad' | orderBy: 'especialidad'",ng-init='callAtTimeout()')
+                                td {{row1.especialidad}}   
+                                td(ng-repeat="row in grafica1 | orderBy: 'especialidad'" ){{row.especialidad === row1.especialidad ? {{row.total | number}} : null }}
                 div.nav-tabs-custom.col-md-12(ng-show='title !== "Departamento y Grados" && title !== "Especialidad y Departamentos"')
                     ul.nav.nav-tabs.pull-right
                         li
@@ -56,12 +67,10 @@ block content
                                 i.fa.fa-bar-chart
                                 |  BARRAS
                 
-                div.col-md-12(ng-show='title != "Departamento y Grados"')
+                div#v1.col-md-12(ng-show='title != "Departamento y Grados" || title != "Especialidad y Departamentos"')
                     div#graficaA.graficaA
-                div.col-md-12(ng-show='title != "Departamento y Grados"')
-
                     div#graficaB.graficaB(style='display:none;') 
-                div.col-md-12(ng-show='title == "Departamento y Grados"')
+                div#v2.col-md-12(ng-show='title == "Departamento y Grados" || title == "Especialidad y Departamentos"')
                     div#graficaA1.graficaA1
                 div.col-md-12(ng-show='title.length == null') 
                     div.alert.alert-info

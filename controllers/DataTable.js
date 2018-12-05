@@ -18,7 +18,7 @@ titulost=[{
     v_gradot : 'Grado',
     v_generot : 'Género',
     v_deptogradot_final : 'Departamento y Grados',
-    // v_especialidaddeptot : 'Especialidad y Departamentos'
+    v_especialidaddeptot : 'Especialidad y Departamentos'
 }];
     
 function enviarrows(req, res){

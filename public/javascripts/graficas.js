@@ -7,7 +7,7 @@ app.controller('graficas', function($scope, $http,$timeout) {
 		{value : "v_gradoa", select : "Grado"},
 		{value : "v_generoa", select : "Género"},
 		{value : "v_deptogradoa_final", select : "Departamento y Grados"},
-		// {value : "v_especialidaddeptoa", select : "Especialidad y Departamentos"},
+		{value : "v_especialidaddeptoa", select : "Especialidad y Departamentos"},
 	];
 	$scope.tipo1 = [
         {value : "v_departamentot", select : "Departamento"},
@@ -36,13 +36,20 @@ app.controller('graficas', function($scope, $http,$timeout) {
 			})
 			$timeout(function callAtTimeout() {
 				if($scope.selectActas !== "v_deptogradoa_final" && $scope.selectActas!== "v_especialidaddeptoa"){
+					$('#v2').hide();
+					$('#v1').show();
 					graficabarra();
 					graficapastel();
 				}
-				if($scope.selectActas == "v_deptogradoa_final" || $scope.selectActas== "v_especialidaddeptoa"){
+				if($scope.selectActas == "v_deptogradoa_final" || $scope.selectActas == "v_especialidaddeptoa"){
+					$('#v1').hide();
+					$('#v2').show();
 					graficabarra2();
 				}
-			 }, 500);
+				// if($scope.selectActas == "v_especialidaddeptoa"){
+				// 	graficabarra3();
+				// }
+			 }, 800);
 		
 	}
 	$scope.selectgraficas1 = function(){
@@ -58,20 +65,24 @@ app.controller('graficas', function($scope, $http,$timeout) {
 			$scope.title = response.data[0].title[0]
 			$scope.encabezados = response.data[0].encabezados;
 			// $scope.tiempo = response.status;
+		//	console.log(JSON.stringify($scope.grafica1))
 		}, function onError(response) {
 			var data = response.data;
 			console.log(data);
 		})
 		$timeout(function callAtTimeout() {
-			if($scope.selectTesis !== "v_deptogradot_final" && $scope.selectTesis!== "v_deptogradot_final"){
+			if($scope.selectTesis !== "v_deptogradot_final" && $scope.selectTesis!== "v_especialidaddeptot"){
+				$('#v2').hide();
+				$('#v1').show();
 				graficabarra();
 				graficapastel();
 			}
-			if($scope.selectTesis == "v_deptogradot_final" || $scope.selectTesis== "v_deptogradot_final"){
-				
+			if($scope.selectTesis == "v_deptogradot_final" || $scope.selectTesis== "v_especialidaddeptot"){
+				$('#v1').hide();
+				$('#v2').show();
 				graficabarra2();
 			}
-		 }, 500);
+		 }, 800);
 	
 	}
 	$scope.selectgraficasanio = function(x){
@@ -124,13 +135,12 @@ app.controller('graficas', function($scope, $http,$timeout) {
 			console.log(data);
 		})
 		$timeout(function callAtTimeout() {
-			if($scope.title !== "Departamento y Grados" && $scope.title!== "Especialidad y Departamentos"){
+			if($scope.title !== "Departamento y Grados" && $scope.title !== "Especialidad y Departamentos"){
 				graficabarra();
 				graficapastel();
 			}
 			
-			if($scope.title == "Departamento y Grados" || $scope.title== "Especialidad y Departamentos"){
-				
+			if($scope.title == "Departamento y Grados" || $scope.title == "Especialidad y Departamentos"){
 				graficabarra2();
 			}
 		 }, 500);
@@ -232,6 +242,7 @@ app.controller('graficas', function($scope, $http,$timeout) {
 		})
 	}
 	function graficabarra2(){
+		
 		Highcharts.chart('graficaA1', {
 			data: {
 				table: 'datatable'
@@ -283,4 +294,5 @@ app.controller('graficas', function($scope, $http,$timeout) {
 				//series: 
 		});
 	}
+
 });
