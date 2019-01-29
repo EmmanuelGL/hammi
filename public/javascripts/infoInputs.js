@@ -31,7 +31,84 @@ $scope.consulta = function(){
         $scope.user = {};
         $scope.form.$setUntouched();
     };
-
+$scope.validacion = function(){
+  if($scope.form.matricula.$touched || $scope.form.matricula.$error.required || $scope.form.matricula.$error.number){
+    $scope.error = 'Introducir una Matrícula.'
+    if($scope.form.matricula.$error.number){
+      $scope.user.matricula= null
+      $scope.error = '¡El valor no es un Numero!'
+    }
+    if($scope.form.matricula.$error.max){
+      $scope.user.matricula= null
+      $scope.error = 'La longitud es máximo de 10 digitos '
+    }
+  }
+  //nombre 
+  if($scope.form.name.$touched || $scope.form.name.$error.pattern){
+    $scope.errorname = 'Introducir un Nombre'
+    if($scope.form.name.$error.pattern){
+      $scope.user.nombre= ''
+      $scope.errorname = 'Introducir solo letras'
+    }
+    // if($scope.form.name.$error.required){
+    //   $scope.user.nombre= ''
+    //   $scope.errorname = 'Introducir un Nombre'
+    // }
+  }
+  if($scope.form.name.$touched || $scope.form.name2.$error.pattern){
+    $scope.user.nombre2= ''
+    $scope.errorname2 = 'Introducir solo letras'
+  }
+  if($scope.form.name3.$error.pattern){
+    $scope.user.nombre3= ''
+    $scope.errorname3 = 'Introducir solo letras'
+  } 
+  //apellido errores
+  if($scope.form.apellido.$error.pattern){
+    $scope.user.apellido= ''
+    $scope.errorap = 'Introducir solo letras'
+  }
+  if($scope.form.apellido.$error.required){
+    $scope.errorap = 'Introducir un Apellido'
+    $scope.user.apellido= ''
+  }
+  if($scope.form.apellido2.$error.pattern){
+    $scope.errorap2 = 'Introducir solo letras'
+    $scope.user.apellido2= ''
+  }
+  if($scope.form.apellido3.$error.pattern){
+    $scope.errorap3 = 'Introducir solo letras'
+    $scope.user.apellido3= ''
+  }
+  //anio
+  if($scope.form.anio.$error.required){
+    $scope.erroranio= 'Introducir el año de la Tesis'
+    $scope.user.ano= ''
+  }
+  if($scope.form.anio.$error.number){
+    $scope.erroranio= '¡El valor no es un Numero!'
+    $scope.user.ano= ''
+  }
+  if($scope.form.anio.$error.min || $scope.form.anio.$error.max){
+    $scope.erroranio= `¡El valor debe estar en el rango de 1960 al año ${$scope.n}!`
+    $scope.user.ano= ''
+  }
+  // folio
+  if($scope.form.name.$touched){
+    if($scope.form.folio.$error.required){
+      $scope.errorfolio= 'Introducir el Folio'
+      $scope.user.ano= ''
+    }
+  }
+  if($scope.form.folio.$error.number){
+    $scope.errorfolio= '¡El valor no es un Numero!'
+    $scope.user.folio= ''
+  }
+  if($scope.form.folio.$error.max){
+    $scope.errorfolio= 'El folio es de 10 digitos'
+    $scope.user.folio= ''
+  }
+}
 $scope.rows = [];
 
 $scope.temp = false;
