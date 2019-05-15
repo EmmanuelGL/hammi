@@ -1,0 +1,23 @@
+//- extends ../templates/default
+
+//- block content
+  
+//-   div.ingreso
+//-     div(class="container col-md-4 col-md-offset-4" style=" margin-top:20px;")
+//-         div( class="card")
+//-             form( method='post' autocomplete='off')
+//-             div(class="card-header")
+//-                 div Editar Usuario   
+//-             div(class="card-body") 
+//-                 input(type='hidden' name='id' id='id' class='form-control' ng-model="user.id")
+//-                 div(class='form-group')
+//-                     label(for="email")= 'Email'
+//-                     input(type='email' name='email' id='email'  class='form-control' ng-model="user.email")
+//-                 div(class='form-group')
+//-                     label(for="nombre")= 'Nombre'
+//-                     input(type='text' name='nombre' id='nombre' class='form-control' ng-model="user.nombre")
+//-             div.card-footer.text-right   
+//-                 button(ng-click='edit(user)' class='btn btn-primary rounded-pill animated infinite pulse')= 'Guardar'
+//-         br
+//-         if duplicate.length > 0
+//-             div(class='alert alert-danger' role='alert')= duplicate 

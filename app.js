@@ -9,7 +9,12 @@ var session = require('express-session');
 var routes = require('./routes/routes');
 var passport = require('passport');
 require('./passport/passport')(passport);
-
+const db = require('./database/db.connection');
+db.sequelize.sync(
+                  //   {force: true}).then(() => {
+                  //   console.log('Drop and Resync with { force: true }');
+                  //  }
+                  );
 var app = express();
 
 app.use(cookieParser());

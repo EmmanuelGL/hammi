@@ -23,6 +23,8 @@
     "dynatable": "^0.3.1",
     "chart.js": "^2.7.1",
     "highcharts": "^6.0.7",
-    "bootstrap-sweetalert": "^1.0.1"
+    "bootstrap-sweetalert": "^1.0.1",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1"
   }
 }

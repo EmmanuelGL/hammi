@@ -1,0 +1,25 @@
+extends ../templates/default
+
+block content
+  
+  div.ingreso
+    div(class="container col-md-4 col-md-offset-4" style=" margin-top:20px;")
+      div( class="card")
+        form(action='/auth/signup' method='post' autocomplete='off' validated)
+          div(class="card-header")
+            div Registrarme   
+          div(class="card-body") 
+              div(class='form-group')
+                label(for="email")= 'Email'
+                input(type='email' name='email' id='email' placeholder='Email' class='form-control' required)
+              div(class='form-group')
+                label(for="nombre")= 'Nombre'
+                input(type='text' name='nombre' id='nombre' placeholder='Nombre' class='form-control' required)
+              div(class='form-group')
+                label(for="password")= 'Password'
+                input(type='password' name='password' id='password' placeholder='Password' class='form-control' required)
+          div.card-footer.text-right   
+              button(type="submit" class='btn btn-primary rounded-pill animated infinite pulse')= 'Registrarme'
+      br
+      if duplicate.length > 0
+        div(class='alert alert-danger' role='alert')= duplicate

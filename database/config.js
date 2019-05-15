@@ -9,11 +9,17 @@
 
 // conectar con postgres
   const config = {
-		user: 'postgres',
-		host: '127.0.0.1',
-		database: 'Tesisultima',
-		password: 'root',
-		port: 5432,
+      database: 'hammy',
+      username: 'root',
+      password: '',
+      host: 'localhost',
+      dialect: 'mysql', //dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
+      pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      }
 		}
   module.exports = config;
   

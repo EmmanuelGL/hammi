@@ -1,24 +1,25 @@
 extends ../templates/default
 
 block content
-  br
-  div(class='row' style='margin-top:50px')
-    div(class='col-md-4 col-md-offset-4')
-      
+  
+  div.ingreso
+    
+    div(class="container col-md-4 col-md-offset-4" style=" margin-top:20px;")
       if message.length > 0
         div(class='alert alert-success' role='alert')= message
-
-      div(class='panel panel-default')
-        div(class='panel-heading')= 'Iniciar Sesión'
-        div(class='panel-body')
+      div( class="card")
           form(action='/auth/signin' method='post' autocomplete='off')
-            div(class='form-group')
-              label(for="email")= 'Usuario'
-              input(type='text' name='username' placeholder='Nombre de usuario' class='form-control')
-            div(class='form-group')
-              label(for="password")= 'Contraseña'
-              input(type='password' name='password' placeholder='Su contraseña' class='form-control')
-            button(type="submit" class='btn btn-primary')= 'Iniciar Sesión'
-
+            div( class="card-header")
+              div Iniciar Sesión
+            div( class="card-body")
+              div(class='form-group')
+                label(for="email")= 'Usuario'
+                input(type='text' name='username' placeholder='Nombre de usuario' class='form-control')
+              div(class='form-group')
+                label(for="password")= 'Contraseña'
+                input(type='password' name='password' placeholder='Su contraseña' class='form-control' )
+            div( class="card-footer text-right")
+              button(type="submit" class='btn btn-primary rounded-pill animated infinite pulse')= 'Iniciar Sesión'
+      br
       if authmessage.length > 0
         div(class='alert alert-danger' role='alert')= authmessage

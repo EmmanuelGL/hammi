@@ -2,13 +2,13 @@ doctype html
 html
   head
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    if(title == null)
-      title borges
-    title=title
+    title borges
     include dependencies
-  body(style="background-color:#C6DEDE;")   
-    div#main
-      include nav
-      if isAuthenticated  
-        include sidebar
-      block content
+  body(style="background-color:black;"  ng-app="myApp" ng-controller="formCtrl")  
+    div.card-bg-dark
+      div.card-header.bg-dark
+        include nav
+      div.card-body(style="background-color:#C6DEDE;")
+        block content
+      div.card-footer.bg-dark(style="fixed-bottom")
+          include footer
