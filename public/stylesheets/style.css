@@ -10,3 +10,11 @@ padding-right: 10px;
 .jumbotron{
     background-image: url('.././images/fondo.png');
 }
+
+a>em {
+    line-height: 50px;
+}
+
+h1, h4 {
+    text-align: center
+}

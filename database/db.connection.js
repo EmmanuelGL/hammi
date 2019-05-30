@@ -27,5 +27,6 @@ sequelize.authenticate()
     db.sequelize = sequelize;
 
     db.user = require('../model/user.model.js')(sequelize, Sequelize);
+    db.cliente = require('../model/clientes.model')(sequelize, Sequelize);
      
     module.exports = db;
