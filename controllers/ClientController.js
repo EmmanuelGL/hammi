@@ -1,29 +1,19 @@
 const db = require('../database/db.connection');
-const Cliente = db.cliente;
-var bcrypt = require('bcryptjs');
+const Clientes = db.cliente; 
 
 module.exports = {
-
-	getSignUp : function(req, res, next){
-		Cliente.findAll()
+	getViewsClient: (req, res)=>{
+		return res.render('clientes/datos')
+	},
+	getCliente: (req,res) =>{
+		
+		Clientes.findAll()
 		.then(user=>{
-			return done(null, {
-							id: user.id, 
-							nombre : user.name,
-							email : user.email,
-							password : user.password,
-							rol: user.roles
-						});
-		}	
+			return res.json(user);
 		})
 		.catch(err=>{
-			return done(null, false, req.flash('authmessage', 'Surgio un error'+err));
+			return res.json(err);
 		})
 
-
-
-		return res.render('users/signup', {duplicate: req.flash('duplicate')});
-	},
-
-	
+	}
 };

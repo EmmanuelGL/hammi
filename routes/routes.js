@@ -22,19 +22,11 @@ router.get('/users/edit', AuthMiddleware.isLogged ,controllers.UserController.ge
 // router.put('/user/edit:productId', [checkDuplicateEmail, AuthMiddleware.isLogged], controllers.UserController.updateUser)
 
 router.get('/products/details',AuthMiddleware.isLogged, controllers.UserController.getProducts)
+router.get('/clientes/datos',AuthMiddleware.isLogged, controllers.ClientController.getViewsClient);
+router.get('/clientesDatos',AuthMiddleware.isLogged, controllers.ClientController.getCliente);
 
 
 
-// rutas para las exportaciones de tesis y actas 
-// router.get('/exportar/actas', AuthMiddleware.isLogged, controllers.Exports.getActas);
-// router.post('/exportar/actas', AuthMiddleware.isLogged, controllers.Exports.postActas);
-// router.get('/exportar/tesis', AuthMiddleware.isLogged, controllers.Exports.getTesis);
-// router.post('/exportar/tesis', AuthMiddleware.isLogged, controllers.Exports.postTesis);
-// rutas para las tablas 
-// router.get('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.getActas);
-// router.post('/tablas/actas', AuthMiddleware.isLogged, controllers.DataTable.postActas);
-// router.get('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.getTesis);
-// router.post('/tablas/tesis', AuthMiddleware.isLogged, controllers.DataTable.postTesis);
 
 
 module.exports = router;

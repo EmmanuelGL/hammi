@@ -1,9 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
 	const Cliente = sequelize.define('clientes', {
-		empresa:{
+		Empresa:{
             type: Sequelize.STRING
         },
-		name: {
+		Nombre: {
 		  type: Sequelize.STRING
 	    },
 	    email: {
@@ -13,10 +13,11 @@ module.exports = (sequelize, Sequelize) => {
 		  type: Sequelize.STRING
 		},
 		
-		createdAt: Sequelize.DATE,
-        updatedAt: Sequelize.DATE,
+		// createdAt: Sequelize.DATE,
+        // updatedAt: Sequelize.DATE,
 		
-	});
+	},
+	{ sequelize, timestamps: false } );
 	return Cliente;
 }
 

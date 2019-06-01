@@ -1,0 +1,28 @@
+extends ../templates/default
+
+block content
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js")
+  script(src='/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js')
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/angucomplete-alt/2.4.1/angucomplete-alt.min.js")
+   //-   link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+  link(rel='stylesheet', href='/stylesheets/products.css')
+  div(ng-app="clientes" ng-controller="datos")
+    div.jumbotron  
+        div.col-md-12(class='table responsive')
+        
+            table#local(class="table  table-striped ")
+                caption Lista de Clientes
+                thead
+                    tr
+                        th(scope="col") Empresa
+                        th(scope="col") Nombre
+                        th(scope="col") Correo Electrónico
+                        th(scope="col") Teléfono
+                    
+                tbody
+                    tr(ng-repeat='x in filteredTodos')
+                        td {{x.Empresa}} 
+                        td {{x.Nombre}} 
+                        td {{x.email}} 
+                        td {{x.telefono}}                
+        .container(data-pagination='', data-num-pages='numPages()', data-current-page='currentPage', data-max-size='maxSize', data-boundary-links='true')
